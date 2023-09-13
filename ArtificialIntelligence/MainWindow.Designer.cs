@@ -28,12 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            DebugField = new TextBox();
+            SuspendLayout();
+            // 
+            // DebugField
+            // 
+            DebugField.Location = new Point(12, 12);
+            DebugField.Multiline = true;
+            DebugField.Name = "DebugField";
+            DebugField.Size = new Size(439, 426);
+            DebugField.TabIndex = 0;
+            // 
+            // MainWindow
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(DebugField);
+            Name = "MainWindow";
             Text = "Form1";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private TextBox DebugField;
     }
 }

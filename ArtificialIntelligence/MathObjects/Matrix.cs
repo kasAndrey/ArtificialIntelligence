@@ -7,16 +7,24 @@
         public int Rows { get; private set; }
         public int Columns { get; private set; }
 
-        public Matrix(int rows, int columns)
+        public Matrix(int rows, int columns, double initValue = 0)
         {
             Rows = rows; Columns = columns;
             data = new double[Rows, Columns];
+            
+            for (int i = 0; i < Rows; i++)
+            {
+                for (int j = 0; j < Columns; j++)
+                {
+                    data[i, j] = initValue;
+                }
+            }
         }
 
         public double this[int i, int j]
         {
             get { return data[i, j]; }
-            private set { data[i, j] = value; }
+            set { data[i, j] = value; }
         }
 
         public static Matrix operator * (Matrix A, Matrix B)
@@ -41,14 +49,63 @@
             return c;
         }
 
+        public static Matrix operator + (Matrix A, Matrix B)
+        {
+            if (!(A.Columns == B.Columns && A.Rows == B.Rows))
+            {
+                throw new ArgumentException("Invalid size of Matrices: Matrix A should have same size as Matrix B");
+            }
+
+            Matrix c = new(A.Rows, A.Columns);
+
+            for (int i = 0; i < A.Rows; i++)
+            {
+                for (int j = 0; j < A.Columns; j++)
+                {
+                    c[i, j] = A[i, j] + B[i, j];
+                }
+            }
+            return c;
+        }
+
+        public static Matrix operator -(Matrix A)
+        {
+            Matrix c = new(A.Rows, A.Columns);
+
+            for (int i = 0; i < A.Rows; i++)
+            {
+                for (int j = 0; j < A.Columns; j++)
+                {
+                    c[i, j] = -A[i, j];
+                }
+            }
+
+            return c;
+        }
+
+        public static Matrix operator -(Matrix A, Matrix B)
+        {
+            return A + (-B);
+        }
+
+        public static explicit operator Vector(Matrix A)
+        {
+            Vector c = new(A.Rows);
+            for (int i = 0; i < A.Rows; i++)
+            {
+                c[i] = A[i, 0];
+            }
+            return c;
+        }
+
         public Matrix Transpose()
         {
-            Matrix c = new (Rows, Columns);
+            Matrix c = new (Columns, Rows);
             for (int i = 0; i < Rows; i++)
             {
                 for (int j = 0; j < Columns; j++)
                 {
-                    c[i, j] = this[j, i];
+                    c[j, i] = this[i, j];
                 }
             }
             return c;
