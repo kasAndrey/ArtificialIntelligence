@@ -1,4 +1,5 @@
-using ArtificialIntelligence.NeuralNetwork;
+using ArtificialIntelligence.Lab1Hamming;
+using ArtificialIntelligence.Lab8AntColony;
 
 namespace ArtificialIntelligence
 {
@@ -8,16 +9,8 @@ namespace ArtificialIntelligence
         {
             InitializeComponent();
 
-            INeuralNetwork neuralNetwork = new HammingNN();
-            ((HammingNN)neuralNetwork).Debugger += Debug;
-
-            neuralNetwork.Train(ImageProcessor.LoadReferencePictures());
-            neuralNetwork.Recognize(ImageProcessor.LoadUnknownPicture(@"..\..\..\Images\Unknown_A.bmp"));
-        }
-
-        private void Debug(string info)
-        {
-            DebugField.Text += info + "\n";
+            TabControl.TabPages.Add(new HammingMGMT());
+            TabControl.TabPages.Add(new AntColonyMGMT());
         }
     }
 }

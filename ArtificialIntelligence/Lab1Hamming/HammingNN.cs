@@ -1,16 +1,13 @@
 ﻿using ArtificialIntelligence.MathObjects;
+using ArtificialIntelligence.NeuralNetwork;
 
-namespace ArtificialIntelligence.NeuralNetwork
+namespace ArtificialIntelligence.Lab1Hamming
 {
-    public delegate void DebugInfo(string textInfo);
-
     public class HammingNN : INeuralNetwork
     {
         private const double maxSqrError = 1e-2;
 
         private HammingNNBrain brain;
-
-        public event DebugInfo? Debugger;
 
         public HammingNN()
         {
@@ -18,8 +15,8 @@ namespace ArtificialIntelligence.NeuralNetwork
         }
 
         public void Train(Vector[] images) => brain = HammingNNBrain.Create(images);
-        
-        public void Recognize(Vector image)
+
+        public int Recognize(Vector image)
         {
             if (image.Length != brain.ImageComponentsCount)
             {
@@ -27,15 +24,26 @@ namespace ArtificialIntelligence.NeuralNetwork
             }
 
             Vector o1 = brain.FirstStep(image), o2 = brain.SecondStep(o1);
-            Debugger?.Invoke($"{o1}\n{o2}");
 
             while ((o2 - o1).SqrMagnitude() > maxSqrError)
             {
                 o1 = o2;
                 o2 = brain.SecondStep(o1);
-
-                Debugger?.Invoke(o2.ToString());
             }
+
+            int referenceImageIndex = -1, possibleImages = 0;
+            for (int i = 0; i < o2.Length; i++)
+            {
+                if (o2[i] != 0)
+                {
+                    referenceImageIndex = i;
+                    possibleImages++;
+                }
+            }
+
+            brain.FilterValues(ref o2);
+
+            return possibleImages == 1 ? referenceImageIndex : -1;
         }
 
         /*public void Load(object data)

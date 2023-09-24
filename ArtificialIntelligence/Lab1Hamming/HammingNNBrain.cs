@@ -1,9 +1,9 @@
 ﻿using ArtificialIntelligence.MathObjects;
 
-namespace ArtificialIntelligence.NeuralNetwork
+namespace ArtificialIntelligence.Lab1Hamming
 {
     [Serializable]
-    public struct HammingNNBrain
+    public class HammingNNBrain
     {
         public int ReferenceImagesCount { get; private set; }
         public int ImageComponentsCount { get; private set; }
@@ -11,12 +11,29 @@ namespace ArtificialIntelligence.NeuralNetwork
         private Matrix neuronWeights, feedbackWeights;
         private double actFunctionLB, actFunctionUB;
 
-        private void ApplyActivationFunction(ref Vector s)
+        public HammingNNBrain()
+        {
+            ReferenceImagesCount = 0; ImageComponentsCount = 0;
+            actFunctionLB = 0; actFunctionUB = 0;
+            neuronWeights = new(0, 0);
+            feedbackWeights = neuronWeights;
+        }
+
+        private void ApplyZActivationFunction(ref Vector s)
         {
             for (int i = 0; i < s.Length; i++)
             {
                 if (s[i] < actFunctionLB) s[i] = actFunctionLB;
                 else if (s[i] > actFunctionUB) s[i] = actFunctionUB;
+                else s[i] *= 0.5;
+            }
+        }
+
+        private void ApplyAActivationFunction(ref Vector s)
+        {
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s[i] < 0) s[i] = 0;
             }
         }
 
@@ -33,9 +50,9 @@ namespace ArtificialIntelligence.NeuralNetwork
                     throw new ArgumentException("Images have different components count");
                 }
             }
-            
+
             instance.actFunctionLB = 0;
-            instance.actFunctionUB = instance.ImageComponentsCount / 2.0;
+            instance.actFunctionUB = instance.ImageComponentsCount;
             instance.neuronWeights = new(instance.ReferenceImagesCount, instance.ImageComponentsCount);
 
             for (int i = 0; i < instance.ReferenceImagesCount; i++)
@@ -51,7 +68,7 @@ namespace ArtificialIntelligence.NeuralNetwork
             {
                 for (int j = 0; j < instance.ReferenceImagesCount; j++)
                 {
-                    instance.feedbackWeights[i, j] = i == j ? 1.0 : -1.0 / instance.ImageComponentsCount; 
+                    instance.feedbackWeights[i, j] = i == j ? 1.0 : -1.0 / instance.ReferenceImagesCount;
                 }
             }
             return instance;
@@ -59,8 +76,8 @@ namespace ArtificialIntelligence.NeuralNetwork
 
         public Vector FirstStep(Vector unknownImage)
         {
-            Vector results = (Vector)(neuronWeights * unknownImage + new Vector(ReferenceImagesCount, ImageComponentsCount / 2.0));
-            ApplyActivationFunction(ref results);
+            Vector results = new Vector(ReferenceImagesCount, ImageComponentsCount / 2.0) + (Vector)(neuronWeights * unknownImage);
+            ApplyZActivationFunction(ref results);
 
             return results;
         }
@@ -68,9 +85,17 @@ namespace ArtificialIntelligence.NeuralNetwork
         public Vector SecondStep(Vector output)
         {
             Vector nextOutput = (Vector)(feedbackWeights * output);
-            ApplyActivationFunction(ref nextOutput);
-            
+            ApplyAActivationFunction(ref nextOutput);
+
             return nextOutput;
+        }
+
+        public void FilterValues(ref Vector values)
+        {
+            for (int i = 0; i < values.Length; i++)
+            {
+                if (values[i] > 0) values[i] = 1;
+            }
         }
     }
 }

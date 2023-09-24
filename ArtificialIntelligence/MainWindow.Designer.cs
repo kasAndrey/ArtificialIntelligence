@@ -28,31 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DebugField = new TextBox();
+            TabControl = new TabControl();
             SuspendLayout();
             // 
-            // DebugField
+            // TabControl
             // 
-            DebugField.Location = new Point(12, 12);
-            DebugField.Multiline = true;
-            DebugField.Name = "DebugField";
-            DebugField.Size = new Size(439, 426);
-            DebugField.TabIndex = 0;
+            TabControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            TabControl.Location = new Point(0, 0);
+            TabControl.Margin = new Padding(0);
+            TabControl.Name = "TabControl";
+            TabControl.SelectedIndex = 0;
+            TabControl.Size = new Size(702, 342);
+            TabControl.TabIndex = 0;
             // 
             // MainWindow
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(DebugField);
+            ClientSize = new Size(704, 345);
+            Controls.Add(TabControl);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "MainWindow";
-            Text = "Form1";
+            Text = "AI LabWorks";
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private TextBox DebugField;
+        private TabControl TabControl;
     }
 }
