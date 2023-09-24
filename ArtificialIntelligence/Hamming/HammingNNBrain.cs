@@ -1,6 +1,6 @@
 ﻿using ArtificialIntelligence.MathObjects;
 
-namespace ArtificialIntelligence.Lab1Hamming
+namespace ArtificialIntelligence.Hamming
 {
     [Serializable]
     public class HammingNNBrain

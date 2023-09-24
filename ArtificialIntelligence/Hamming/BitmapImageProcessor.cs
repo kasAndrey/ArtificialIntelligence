@@ -1,6 +1,6 @@
 ﻿using ArtificialIntelligence.MathObjects;
 
-namespace ArtificialIntelligence.Lab1Hamming
+namespace ArtificialIntelligence.Hamming
 {
     static class BitmapImageProcessor
     {
@@ -8,7 +8,7 @@ namespace ArtificialIntelligence.Lab1Hamming
         const int WHITE = 0xFFFFFF;
         //const int BLACK = 0x000000;
 
-        public const string ImagesDirectory = @"..\..\..\Lab1Hamming\Images\";
+        public const string ImagesDirectory = @"..\..\..\Hamming\Images\";
         public static Vector BitmapToVector(Bitmap bmp)
         {
             Vector a = new(bmp.Width * bmp.Height);

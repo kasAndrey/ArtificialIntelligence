@@ -9,13 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Lab1Hamming\Images\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Lab8AntColony\AntColonyMGMT.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Folder Include="AntColony\Graphs\" />
   </ItemGroup>
 
 </Project>

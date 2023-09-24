@@ -1,7 +1,7 @@
 ﻿using ArtificialIntelligence.MathObjects;
 using ArtificialIntelligence.NeuralNetwork;
 
-namespace ArtificialIntelligence.Lab1Hamming
+namespace ArtificialIntelligence.Hamming
 {
     public class HammingNN : INeuralNetwork
     {

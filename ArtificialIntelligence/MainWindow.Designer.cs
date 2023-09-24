@@ -28,26 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
-            TabControl = new TabControl();
+            ContainerForForms = new GroupBox();
+            buttonsPanel = new FlowLayoutPanel();
             SuspendLayout();
             // 
-            // TabControl
+            // ContainerForForms
             // 
-            TabControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            TabControl.Location = new Point(0, 0);
-            TabControl.Margin = new Padding(0);
-            TabControl.Name = "TabControl";
-            TabControl.SelectedIndex = 0;
-            TabControl.Size = new Size(702, 342);
-            TabControl.TabIndex = 0;
+            ContainerForForms.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ContainerForForms.Location = new Point(14, 84);
+            ContainerForForms.Margin = new Padding(3, 4, 3, 4);
+            ContainerForForms.Name = "ContainerForForms";
+            ContainerForForms.Padding = new Padding(3, 4, 3, 4);
+            ContainerForForms.Size = new Size(804, 492);
+            ContainerForForms.TabIndex = 0;
+            ContainerForForms.TabStop = false;
+            // 
+            // buttonsPanel
+            // 
+            buttonsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            buttonsPanel.AutoScroll = true;
+            buttonsPanel.Location = new Point(14, 16);
+            buttonsPanel.Margin = new Padding(3, 4, 3, 4);
+            buttonsPanel.Name = "buttonsPanel";
+            buttonsPanel.Size = new Size(804, 60);
+            buttonsPanel.TabIndex = 1;
+            buttonsPanel.WrapContents = false;
             // 
             // MainWindow
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(704, 345);
-            Controls.Add(TabControl);
-            Margin = new Padding(3, 2, 3, 2);
+            ClientSize = new Size(832, 593);
+            Controls.Add(buttonsPanel);
+            Controls.Add(ContainerForForms);
+            MinimumSize = new Size(820, 624);
             Name = "MainWindow";
             Text = "AI LabWorks";
             ResumeLayout(false);
@@ -55,6 +69,7 @@
 
         #endregion
 
-        private TabControl TabControl;
+        private GroupBox ContainerForForms;
+        private FlowLayoutPanel buttonsPanel;
     }
 }
