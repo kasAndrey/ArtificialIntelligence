@@ -18,7 +18,7 @@ namespace ArtificialIntelligence.Hamming
 
         public int Recognize(Vector image)
         {
-            if (image.Length != brain.ImageComponentsCount)
+            if (image.Count != brain.ImageComponentsCount)
             {
                 throw new ArgumentException("Unknown image's components count differs from reference images'");
             }
@@ -32,7 +32,7 @@ namespace ArtificialIntelligence.Hamming
             }
 
             int referenceImageIndex = -1, possibleImages = 0;
-            for (int i = 0; i < o2.Length; i++)
+            for (int i = 0; i < o2.Count; i++)
             {
                 if (o2[i] != 0)
                 {

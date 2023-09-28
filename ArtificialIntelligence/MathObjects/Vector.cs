@@ -3,17 +3,21 @@
     public class Vector
     {
         private double[] data;
-        public int Length { get; private set; }
+        public int Count
+        {
+            get => data.Length;
+        }
 
         public Vector(int length, double initValue = 0)
         {
-            Length = length;
-            data = new double[Length];
-            for (int i = 0; i < Length; i++)
+            data = new double[length];
+            for (int i = 0; i < Count; i++)
             {
                 data[i] = initValue;
             }
         }
+
+        public Vector(params double[] values) => data = values;
 
         public double this[int i]
         {
@@ -23,13 +27,13 @@
 
         public static Vector operator +(Vector A, Vector B)
         {
-            if (A.Length != B.Length)
+            if (A.Count != B.Count)
             {
                 throw new ArgumentException("Vectors have different sizes");
             }
 
-            Vector c = new(A.Length);
-            for (int i = 0; i < A.Length; i++)
+            Vector c = new(A.Count);
+            for (int i = 0; i < A.Count; i++)
             {
                 c[i] = A[i] + B[i];
             }
@@ -39,8 +43,8 @@
 
         public static Vector operator -(Vector A)
         {
-            Vector c = new(A.Length);
-            for (int i = 0; i < A.Length; i++)
+            Vector c = new(A.Count);
+            for (int i = 0; i < A.Count; i++)
             {
                 c[i] = -A[i];
             }
@@ -55,8 +59,8 @@
 
         public static implicit operator Matrix(Vector A)
         {
-            Matrix c = new(A.Length, 1);
-            for (int i = 0; i < A.Length; i++)
+            Matrix c = new(A.Count, 1);
+            for (int i = 0; i < A.Count; i++)
             {
                 c[i, 0] = A[i];
             }
@@ -65,13 +69,13 @@
 
         public static double DotProduct(Vector A, Vector B)
         {
-            if (A.Length != B.Length)
+            if (A.Count != B.Count)
             {
                 throw new ArgumentException("Vectors have different sizes");
             }
 
             double result = 0;
-            for (int i = 0; i < A.Length; i++)
+            for (int i = 0; i < A.Count; i++)
             {
                 result += A[i] * B[i];
             }
@@ -79,16 +83,27 @@
             return result;
         }
 
+        public double Length() => Math.Sqrt(SqrMagnitude());
+
+        public Vector Normalized()
+        {
+            Vector newVector = this;
+            double l = Length();
+            for (int i = 0; i < Count; i++) newVector[i] /= l;
+
+            return newVector;
+        }
+
         public double SqrMagnitude() => DotProduct(this, this);
 
         public override string ToString()
         {
             string repr = "[";
-            for (int i = 0; i < Length; i++)
+            for (int i = 0; i < Count; i++)
             {
-                repr += $"{this[i]}" + (i == Length - 1 ? "]" : " ");
+                repr += $"{this[i]}" + (i == Count - 1 ? "" : " ");
             }
-            return repr;
+            return repr + "]";
         }
     }
 }

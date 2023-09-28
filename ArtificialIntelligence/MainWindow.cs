@@ -17,6 +17,11 @@ namespace ArtificialIntelligence
 
         private void CreateNewForm(string description, Form form)
         {
+            form.TopLevel = false;
+            form.FormBorderStyle = FormBorderStyle.None;
+            form.Dock = DockStyle.Fill;
+            form.Visible = true;
+
             allForms.Add(description, form);
 
             Button btn = new()
@@ -35,15 +40,9 @@ namespace ArtificialIntelligence
             ContainerForForms.Controls.Clear();
 
             string description = (sender as Button)!.Text;
-            Form form = allForms[description];
-
-            form.TopLevel = false;
-            form.FormBorderStyle = FormBorderStyle.None;
-            form.Dock = DockStyle.Fill;
-            form.Visible = true;
 
             ContainerForForms.Text = description;
-            ContainerForForms.Controls.Add(form);
+            ContainerForForms.Controls.Add(allForms[description]);
         }
     }
 }

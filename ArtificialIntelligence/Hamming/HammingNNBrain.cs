@@ -21,7 +21,7 @@ namespace ArtificialIntelligence.Hamming
 
         private void ApplyZActivationFunction(ref Vector s)
         {
-            for (int i = 0; i < s.Length; i++)
+            for (int i = 0; i < s.Count; i++)
             {
                 if (s[i] < actFunctionLB) s[i] = actFunctionLB;
                 else if (s[i] > actFunctionUB) s[i] = actFunctionUB;
@@ -31,7 +31,7 @@ namespace ArtificialIntelligence.Hamming
 
         private void ApplyAActivationFunction(ref Vector s)
         {
-            for (int i = 0; i < s.Length; i++)
+            for (int i = 0; i < s.Count; i++)
             {
                 if (s[i] < 0) s[i] = 0;
             }
@@ -41,11 +41,11 @@ namespace ArtificialIntelligence.Hamming
         {
             HammingNNBrain instance = new();
             instance.ReferenceImagesCount = images.Length;
-            instance.ImageComponentsCount = images[0].Length;
+            instance.ImageComponentsCount = images[0].Count;
 
             foreach (Vector image in images)
             {
-                if (image.Length != instance.ImageComponentsCount)
+                if (image.Count != instance.ImageComponentsCount)
                 {
                     throw new ArgumentException("Images have different components count");
                 }
@@ -92,7 +92,7 @@ namespace ArtificialIntelligence.Hamming
 
         public void FilterValues(ref Vector values)
         {
-            for (int i = 0; i < values.Length; i++)
+            for (int i = 0; i < values.Count; i++)
             {
                 if (values[i] > 0) values[i] = 1;
             }

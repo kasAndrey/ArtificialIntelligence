@@ -1,0 +1,19 @@
+# First line contains N vertex names
+# Next N lines represent coordinates of each vertex, respectively
+# Next N lines consist of N edge weights (first line declares all weighted edges from it to other vertices, including itself)
+# Valid weight can be only a positive number, every other symbol is considered no path (infinity)
+# Comments and empty lines are being ignored
+
+A,B,C,D,E
+
+25,0
+125,0
+150,80
+75,120
+0,80
+
+-,2,5,4,1
+1,-,2,8,6
+4,3,-,1,5
+2,6,10,-,4
+1,7,1,11,-
