@@ -55,6 +55,7 @@ namespace ArtificialIntelligence.AntColony
                 path.Add(NextIteration());
                 result += objectsMap[path[i - 1], path[i]];
             }
+            result += objectsMap[path.Last(), path[0]];
 
             SamePaths = LastResult == result ? SamePaths + 1 : 0;
 
