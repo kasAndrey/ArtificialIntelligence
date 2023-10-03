@@ -1,5 +1,6 @@
 using ArtificialIntelligence.Hamming;
 using ArtificialIntelligence.AntColony;
+using ArtificialIntelligence.ParticleSworm;
 
 namespace ArtificialIntelligence
 {
@@ -13,6 +14,7 @@ namespace ArtificialIntelligence
 
             CreateNewForm("Hamming Neural Network", new HammingForm());
             CreateNewForm("Ant Colony Optimization", new AntColonyForm());
+            CreateNewForm("Particle Sworm", new ParticleSwormForm());
         }
 
         private void CreateNewForm(string description, Form form)
