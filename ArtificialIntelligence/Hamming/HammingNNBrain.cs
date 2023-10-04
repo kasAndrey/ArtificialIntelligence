@@ -11,7 +11,7 @@ namespace ArtificialIntelligence.Hamming
         private Matrix neuronWeights, feedbackWeights;
         private double actFunctionLB, actFunctionUB;
 
-        public HammingNNBrain()
+        private HammingNNBrain()
         {
             ReferenceImagesCount = 0; ImageComponentsCount = 0;
             actFunctionLB = 0; actFunctionUB = 0;

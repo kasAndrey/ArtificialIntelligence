@@ -3,21 +3,23 @@ using ArtificialIntelligence.NeuralNetwork;
 
 namespace ArtificialIntelligence.Hamming
 {
-    public class HammingNN : INeuralNetwork
+    public class HammingNN
     {
         private const double maxSqrError = 1e-2;
 
-        private HammingNNBrain brain;
+        private HammingNNBrain? brain;
 
         public HammingNN()
         {
-            brain = new();
+            brain = null;
         }
 
         public void Train(Vector[] images) => brain = HammingNNBrain.Create(images);
 
         public int Recognize(Vector image)
         {
+            if (brain is null) throw new ArgumentNullException(nameof(brain), "There are no reference images yet");
+
             if (image.Count != brain.ImageComponentsCount)
             {
                 throw new ArgumentException("Unknown image's components count differs from reference images'");

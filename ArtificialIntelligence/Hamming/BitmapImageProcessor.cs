@@ -9,8 +9,10 @@ namespace ArtificialIntelligence.Hamming
         //const int BLACK = 0x000000;
 
         public const string ImagesDirectory = @"..\..\..\Hamming\Images\";
-        public static Vector BitmapToVector(Bitmap bmp)
+        public static Vector LoadPicture(string path)
         {
+            Bitmap bmp = (Bitmap)Image.FromFile(path);
+
             Vector a = new(bmp.Width * bmp.Height);
             for (int i = 0; i < bmp.Height; i++)
             {
@@ -21,25 +23,5 @@ namespace ArtificialIntelligence.Hamming
             }
             return a;
         }
-
-        public static Vector[] LoadReferencePictures(FileInfo[] files)
-        {
-            Bitmap[] bmps = new Bitmap[files.Length];
-            for (int i = 0; i < files.Length; i++)
-            {
-                bmps[i] = (Bitmap)Image.FromFile(files[i].FullName);
-            }
-
-            Vector[] codedImages = new Vector[files.Length];
-
-            for (int k = 0; k < files.Length; k++)
-            {
-                codedImages[k] = BitmapToVector(bmps[k]);
-            }
-
-            return codedImages;
-        }
-
-        public static Vector LoadUnknownPicture(string name) => BitmapToVector((Bitmap)Image.FromFile(name));
     }
 }

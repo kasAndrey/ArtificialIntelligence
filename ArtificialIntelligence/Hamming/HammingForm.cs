@@ -1,9 +1,5 @@
-﻿using ArtificialIntelligence.NeuralNetwork;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Security.Cryptography;
+﻿using System.ComponentModel;
+using ArtificialIntelligence.MathObjects;
 
 namespace ArtificialIntelligence.Hamming
 {
@@ -11,16 +7,24 @@ namespace ArtificialIntelligence.Hamming
     {
         private HammingNN neuralNetwork;
 
-        private FileInfo[] referenceImages;
+        private FileInfo[] referenceImageFiles;
 
         public HammingForm()
         {
             InitializeComponent();
 
-            referenceImages = new DirectoryInfo(BitmapImageProcessor.ImagesDirectory).GetFiles("Reference*.bmp");
+            referenceImageFiles = new DirectoryInfo(BitmapImageProcessor.ImagesDirectory).GetFiles("Reference*.bmp");
 
             neuralNetwork = new HammingNN();
-            neuralNetwork.Train(BitmapImageProcessor.LoadReferencePictures(referenceImages));
+
+            Vector[] referenceImages = new Vector[referenceImageFiles.Length];
+
+            for (int i = 0; i < referenceImageFiles.Length; i++)
+            {
+                referenceImages[i] = BitmapImageProcessor.LoadPicture(referenceImageFiles[i].FullName);
+            }
+
+            neuralNetwork.Train(referenceImages);
 
             ofd.InitialDirectory = new DirectoryInfo(BitmapImageProcessor.ImagesDirectory).FullName;
 
@@ -31,7 +35,7 @@ namespace ArtificialIntelligence.Hamming
         {
             try
             {
-                int referencePictureIndex = neuralNetwork.Recognize(BitmapImageProcessor.LoadUnknownPicture(ofd.FileName));
+                int referencePictureIndex = neuralNetwork.Recognize(BitmapImageProcessor.LoadPicture(ofd.FileName));
 
                 inputImage.Image = ResizedImage(Image.FromFile(ofd.FileName));
 
@@ -39,7 +43,7 @@ namespace ArtificialIntelligence.Hamming
                 {
                     uiTextOutput.Text = "Unknown image should be Image #" + (referencePictureIndex + 1) + ".";
                     uiTextOutput.ForeColor = Color.Black;
-                    outputImage.Image = ResizedImage(Image.FromFile(referenceImages[referencePictureIndex].FullName));
+                    outputImage.Image = ResizedImage(Image.FromFile(referenceImageFiles[referencePictureIndex].FullName));
                 }
                 else
                 {
