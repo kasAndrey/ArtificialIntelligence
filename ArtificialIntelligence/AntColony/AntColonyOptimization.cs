@@ -9,7 +9,7 @@ namespace ArtificialIntelligence.AntColony
 
         private double alpha, beta, evaporationRate, pheromoneStrength;
 
-        private readonly Graph objectsMap;
+        private Graph objectsMap;
         private Graph pheromoneMap;
 
         private GraphPath path;
@@ -120,29 +120,6 @@ namespace ArtificialIntelligence.AntColony
                     if (path.ContainPath(i, j)) pheromoneMap[i, j] += pheromoneStrength / pathDistance;
                 }
             }
-        }
-
-        public void ReloadWithNewParameters(double alpha, double beta, double evaporationRate = 0.27, double pheromoneStrength = 1)
-        {
-            this.alpha = alpha;
-            this.beta = beta;
-            this.evaporationRate = evaporationRate;
-            this.pheromoneStrength = pheromoneStrength;
-
-            pheromoneMap = Graph.Empty(objectsMap.Rows);
-            for (int i = 0; i < pheromoneMap.Rows; i++)
-            {
-                for (int j = 0; j < pheromoneMap.Columns; j++)
-                {
-                    pheromoneMap[i, j] = objectsMap[i, j] == double.PositiveInfinity ? double.PositiveInfinity : InitialPheromoneLevel;
-                }
-            }
-
-            path.Clear();
-
-            SamePaths = 0;
-            LastResult = -1;
-            BestResult = Graph.NoPath;
         }
     }
 }

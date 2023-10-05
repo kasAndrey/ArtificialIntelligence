@@ -1,5 +1,4 @@
-﻿using ArtificialIntelligence.MathObjects;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace ArtificialIntelligence.AntColony
 {
@@ -33,7 +32,7 @@ namespace ArtificialIntelligence.AntColony
 
             if (aco.SamePaths >= (int)maxRepeatsNumeric.Value)
             {
-                MessageBox.Show($"Optimal solution found: {vertexes.ToString(true)} ({aco.BestResult})", "Solution found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Optimal solution found: {vertexes.ToString(true)} ({aco.LastResult})", "Solution found", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 SetState(false);
             }
         }
@@ -41,27 +40,16 @@ namespace ArtificialIntelligence.AntColony
         private void InitializeACO(object sender, EventArgs e)
         {
             SetState(true);
-            if (aco is null)
-            {
-                aco = new AntColonyOptimization(
-                    graph!,
-                    (double)alphaNumeric.Value,
-                    (double)betaNumeric.Value,
-                    (double)evapNumeric.Value,
-                    (double)pherStrengthNumeric.Value
-                    );
-            }
-            else
-            {
-                aco.ReloadWithNewParameters(
-                    (double)alphaNumeric.Value,
-                    (double)betaNumeric.Value,
-                    (double)evapNumeric.Value,
-                    (double)pherStrengthNumeric.Value
-                    );
-                graphics.Clear(graphPictureBox.BackColor);
-                graph!.Draw(graphics);
-            }
+
+            aco = new AntColonyOptimization(
+                graph!,
+                (double)alphaNumeric.Value,
+                (double)betaNumeric.Value,
+                (double)evapNumeric.Value,
+                (double)pherStrengthNumeric.Value
+                );
+            graphics.Clear(graphPictureBox.BackColor);
+            graph!.Draw(graphics);
         }
 
         private void StopACO(object sender, EventArgs e)
@@ -164,7 +152,7 @@ namespace ArtificialIntelligence.AntColony
                 return;
             }
             graphics = graphPictureBox.CreateGraphics();
-            graph!.FixGraphics(graphics);
+            graph!.FixGraphics(graphics, graphPictureBox.Bounds);
             graph!.Draw(graphics);
 
             SetState(false);
