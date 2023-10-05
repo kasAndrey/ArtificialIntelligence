@@ -3,7 +3,7 @@ using ArtificialIntelligence.MathObjects;
 
 namespace ArtificialIntelligence.ParticleSworm
 {
-    using Func2Dim = Func<double, double, double>;
+    using TestFunction = Func<double, double, double>;
 
     public class ParticleSworm
     {
@@ -16,16 +16,16 @@ namespace ArtificialIntelligence.ParticleSworm
 
             readonly Random randomNumber;
 
-            public Particle()
+            public Particle(ref Rectangle field, ref Random seed)
             {
-                randomNumber = new();
+                randomNumber = seed;
 
-                velocity = new(randomNumber.NextDouble(), randomNumber.NextDouble());
-                position = new(randomNumber.NextDouble(), randomNumber.NextDouble());
+                velocity = new(randomNumber.NextDouble() * field.Width / 10.0, randomNumber.NextDouble() * field.Height / 10.0);
+                position = new(field.X + randomNumber.NextDouble() * field.Width, field.Y + randomNumber.NextDouble() * field.Height);
                 BestPoint = position;
             }
 
-            public void GoToNextPoint(Vector overallBestPoint, Func2Dim func)
+            public void GoToNextPoint(Vector overallBestPoint, TestFunction func)
             {
                 position += velocity;
 
@@ -42,31 +42,37 @@ namespace ArtificialIntelligence.ParticleSworm
         Particle[] particleSworm;
         Vector globalBestPoint;
 
-        public ParticleSworm(int particleCount)
+        Random rand;
+
+        public ParticleSworm(int particleCount, Rectangle functionBounds)
         {
             particleSworm = new Particle[particleCount];
             globalBestPoint = new Vector(-10.0, -10.0);
 
+            rand = new();
+
             for (int i = 0; i < particleCount; i++)
             {
-                particleSworm[i] = new();
+                particleSworm[i] = new(ref functionBounds, ref rand);
             }
         }
 
-        public Vector FindMinimum(Func2Dim function)
+        public Vector FindMinimum(TestFunction func)
         {
+            if (func is null) throw new ArgumentNullException(nameof(func), "Function is not set");
+
             double difference = double.PositiveInfinity;
             int k = 0;
             while (difference > 1e-2 && k < 1000)
             {
                 foreach (Particle p in particleSworm)
                 {
-                    p.GoToNextPoint(globalBestPoint, function);
+                    p.GoToNextPoint(globalBestPoint, func);
                 }
 
                 foreach (Particle p in particleSworm)
                 {
-                    double fbp = function(p.BestPoint[0], p.BestPoint[1]), fgbp = function(globalBestPoint[0], globalBestPoint[1]);
+                    double fbp = func(p.BestPoint[0], p.BestPoint[1]), fgbp = func(globalBestPoint[0], globalBestPoint[1]);
                     difference = fgbp - fbp;
                     if (difference > 0)
                     {

@@ -34,8 +34,10 @@
             functions = new ComboBox();
             startButton = new Button();
             resultLabel = new Label();
+            formulaImage = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)plot).BeginInit();
             ((System.ComponentModel.ISupportInitialize)particleCount).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)formulaImage).BeginInit();
             SuspendLayout();
             // 
             // plot
@@ -80,11 +82,12 @@
             functions.Size = new Size(194, 28);
             functions.TabIndex = 3;
             functions.Text = "Function 1";
+            functions.SelectedValueChanged += SetFunction;
             // 
             // startButton
             // 
             startButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            startButton.Location = new Point(621, 108);
+            startButton.Location = new Point(620, 186);
             startButton.Name = "startButton";
             startButton.Size = new Size(141, 56);
             startButton.TabIndex = 4;
@@ -101,11 +104,22 @@
             resultLabel.TabIndex = 5;
             resultLabel.Text = "Result: ";
             // 
+            // formulaImage
+            // 
+            formulaImage.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            formulaImage.Location = new Point(594, 99);
+            formulaImage.Name = "formulaImage";
+            formulaImage.Size = new Size(194, 51);
+            formulaImage.SizeMode = PictureBoxSizeMode.Zoom;
+            formulaImage.TabIndex = 6;
+            formulaImage.TabStop = false;
+            // 
             // ParticleSwormForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(formulaImage);
             Controls.Add(resultLabel);
             Controls.Add(startButton);
             Controls.Add(functions);
@@ -116,6 +130,7 @@
             Text = "ParticleSwormForm";
             ((System.ComponentModel.ISupportInitialize)plot).EndInit();
             ((System.ComponentModel.ISupportInitialize)particleCount).EndInit();
+            ((System.ComponentModel.ISupportInitialize)formulaImage).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -128,5 +143,6 @@
         private ComboBox functions;
         private Button startButton;
         private Label resultLabel;
+        private PictureBox formulaImage;
     }
 }
