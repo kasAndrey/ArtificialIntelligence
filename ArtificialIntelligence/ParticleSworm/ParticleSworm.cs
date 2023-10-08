@@ -10,79 +10,86 @@ namespace ArtificialIntelligence.ParticleSworm
         public class Particle
         {
             Vector velocity;
-            Vector position;
+            public Vector Position;
             public Vector BestPoint;
-            const double a1 = 1, a2 = 1;
+            const double a1 = 0.2, a2 = 0.33, a3 = 0.95;
 
             readonly Random randomNumber;
 
-            public Particle(ref Rectangle field, ref Random seed)
+            public Particle(ref RectangleF field, ref Random seed)
             {
                 randomNumber = seed;
 
-                velocity = new(randomNumber.NextDouble() * field.Width / 10.0, randomNumber.NextDouble() * field.Height / 10.0);
-                position = new(field.X + randomNumber.NextDouble() * field.Width, field.Y + randomNumber.NextDouble() * field.Height);
-                BestPoint = position;
+                velocity = new(randomNumber.NextDouble() * 2 - 1, randomNumber.NextDouble() * 2 - 1);
+                Position = new(field.X + randomNumber.NextDouble() * field.Width, field.Y + randomNumber.NextDouble() * field.Height);
+                BestPoint = Position;
             }
 
             public void GoToNextPoint(Vector overallBestPoint, TestFunction func)
             {
-                position += velocity;
+                Position += velocity;
 
-                velocity[0] += a1 * randomNumber.NextDouble() * (BestPoint[0] - position[0]) + a2 * randomNumber.NextDouble() * (overallBestPoint[0] - position[0]);
-                velocity[1] += a1 * randomNumber.NextDouble() * (BestPoint[1] - position[1]) + a2 * randomNumber.NextDouble() * (overallBestPoint[1] - position[1]);
+                velocity[0] = a3 * velocity[0] + a1 * randomNumber.NextDouble() * (BestPoint[0] - Position[0]) + a2 * randomNumber.NextDouble() * (overallBestPoint[0] - Position[0]);
+                velocity[1] = a3 * velocity[1] + a1 * randomNumber.NextDouble() * (BestPoint[1] - Position[1]) + a2 * randomNumber.NextDouble() * (overallBestPoint[1] - Position[1]);
 
-                if (func(position[0], position[1]) < func(BestPoint[0], BestPoint[1]))
+                if (func(Position[0], Position[1]) < func(BestPoint[0], BestPoint[1]))
                 {
-                    BestPoint = position;
+                    BestPoint = Position;
                 }
             }
         }
 
-        Particle[] particleSworm;
+        public Particle[] Particles;
+        public TestFunction F;
         Vector globalBestPoint;
 
-        Random rand;
+        readonly Random rand;
 
-        public ParticleSworm(int particleCount, Rectangle functionBounds)
+        public ParticleSworm(int particleCount, Function f)
         {
-            particleSworm = new Particle[particleCount];
-            globalBestPoint = new Vector(-10.0, -10.0);
+            Particles = new Particle[particleCount];
+            F = f.F;
 
             rand = new();
 
             for (int i = 0; i < particleCount; i++)
             {
-                particleSworm[i] = new(ref functionBounds, ref rand);
+                Particles[i] = new(ref f.Bounds, ref rand);
             }
+
+            globalBestPoint = GetBestPoint();
         }
 
-        public Vector FindMinimum(TestFunction func)
+        public Vector FindMinimum()
         {
-            if (func is null) throw new ArgumentNullException(nameof(func), "Function is not set");
-
-            double difference = double.PositiveInfinity;
-            int k = 0;
-            while (difference > 1e-2 && k < 1000)
+            Vector previous;
+            int sameResults = 0;
+            while (sameResults < 5)
             {
-                foreach (Particle p in particleSworm)
-                {
-                    p.GoToNextPoint(globalBestPoint, func);
-                }
-
-                foreach (Particle p in particleSworm)
-                {
-                    double fbp = func(p.BestPoint[0], p.BestPoint[1]), fgbp = func(globalBestPoint[0], globalBestPoint[1]);
-                    difference = fgbp - fbp;
-                    if (difference > 0)
-                    {
-                        globalBestPoint = p.BestPoint;
-                    }
-                }
-                k++;
+                previous = globalBestPoint;
+                NextIteration();
+                if ((previous - globalBestPoint).SqrMagnitude() < 1e-6) sameResults++;
+                else sameResults = 0;
             }
 
             return globalBestPoint;
+        }
+
+        public Vector NextIteration()
+        {
+            foreach (Particle p in Particles) p.GoToNextPoint(globalBestPoint, F);
+            return globalBestPoint = GetBestPoint();
+        }
+
+        private Vector GetBestPoint()
+        {
+            Vector bp = Particles[0].BestPoint;
+            for (int i = 1; i < Particles.Length; i++)
+            {
+                if (F(Particles[i].BestPoint[0], Particles[i].BestPoint[1]) < F(bp[0], bp[1]))
+                    bp = Particles[i].BestPoint;
+            }
+            return bp;
         }
     }
 }
