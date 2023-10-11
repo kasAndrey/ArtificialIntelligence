@@ -1,5 +1,4 @@
 ﻿using ArtificialIntelligence.MathObjects;
-using System.Net;
 using static ArtificialIntelligence.MathObjects.MathDefs;
 
 namespace ArtificialIntelligence.AntColony
@@ -59,7 +58,7 @@ namespace ArtificialIntelligence.AntColony
 
         private const int vertexSize = 10;
         private const int margin = 10;
-        private double bezierCoeff;
+        private double curveCoeff;
 
         private readonly Pen vertexPen;
         private readonly Pen pathPen;
@@ -82,7 +81,7 @@ namespace ArtificialIntelligence.AntColony
             };
             textBrush = new SolidBrush(Color.Blue);
             valueBrush = new SolidBrush(Color.Orange);
-            bezierCoeff = 30.0 / VertexCount;
+            curveCoeff = 30.0 / VertexCount;
         }
 
         public void Draw(in Graphics g)
@@ -126,13 +125,13 @@ namespace ArtificialIntelligence.AntColony
             g.TranslateTransform(-minX + margin, -minY + margin);
         }
 
-        public void DrawPath(in Graphics g, GraphPath vertex, bool loop = false)
+        public void DrawPath(in Graphics g, GraphPath path, bool loop = false)
         {
-            for (int i = 1; i < vertex.Count + (loop ? 1 : 0); i++)
+            for (int i = 1; i < path.Count + (loop ? 1 : 0); i++)
             {
-                DisplayableVertex first = Vertices[vertex[i - 1]], second = Vertices[vertex[i % vertex.Count]];
+                DisplayableVertex first = Vertices[path[i - 1]], second = Vertices[path[i % path.Count]];
                 Vector direction = new Vector((double)(second.X - first.X), (double)(second.Y - first.Y)).Normalized();
-                Point midpoint = new((first.X + second.X) / 2 - (int)(bezierCoeff * direction[1]), (first.Y + second.Y) / 2 + (int)(bezierCoeff * direction[0]));
+                Point midpoint = new((first.X + second.X) / 2 - (int)(curveCoeff * direction[1]), (first.Y + second.Y) / 2 + (int)(curveCoeff * direction[0]));
 
                 g.DrawCurve(pathPen, new Point[] { new Point(first.X, first.Y), midpoint, new Point(second.X, second.Y) });
             }
@@ -149,7 +148,7 @@ namespace ArtificialIntelligence.AntColony
             Point realFirst = new(first.X + (int)(direction[0] * vertexSize / 2), first.Y + (int)(direction[1] * vertexSize / 2));
             Point realSecond = new(second.X - (int)(direction[0] * vertexSize / 2), second.Y - (int)(direction[1] * vertexSize / 2));
             
-            Point midpoint = new((realFirst.X + realSecond.X) / 2 - (int)(bezierCoeff * direction[1]), (realFirst.Y + realSecond.Y) / 2 + (int)(bezierCoeff * direction[0]));
+            Point midpoint = new((realFirst.X + realSecond.X) / 2 - (int)(curveCoeff * direction[1]), (realFirst.Y + realSecond.Y) / 2 + (int)(curveCoeff * direction[0]));
 
             g.DrawCurve(edgePen, new Point[] { realFirst, midpoint, realSecond });
 

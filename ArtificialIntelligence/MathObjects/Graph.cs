@@ -20,6 +20,7 @@
             Weight = weight;
         }
     }
+
     public class GraphPath : List<int>
     {
         public GraphPath() : base() { }

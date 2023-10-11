@@ -1,5 +1,4 @@
 ﻿using ArtificialIntelligence.MathObjects;
-using System.Reflection;
 
 namespace ArtificialIntelligence.AntColony
 {
