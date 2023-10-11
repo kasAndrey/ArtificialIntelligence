@@ -38,9 +38,11 @@
             }
 
             double[] zones = new double[ColorPallete.Count];
-            for (int i = 0; i < zones.Length; i++)
+            zones[0] = minValue;
+            zones[1] = minValue + 1.25;
+            for (int i = 2; i < zones.Length; i++)
             {
-                zones[i] = minValue + (maxValue - minValue) * i / (zones.Length - 1);
+                zones[i] = zones[1] + (maxValue - zones[1]) * (i - 1) / (zones.Length - 2);
             }
 
             Image img = new Bitmap((int)segments, (int)segments);
@@ -56,6 +58,7 @@
                     {
                         if (zones[k] >= values[i, j]) break;
                     }
+                    if (k == zones.Length) k--;
 
                     Color cell = Interpolate(ColorPallete[k - 1], ColorPallete[k], (values[i, j] - zones[k - 1]) / (zones[k] - zones[k - 1]));
                     g.FillRectangle(new SolidBrush(cell), new Rectangle(i, j, 1, 1));
