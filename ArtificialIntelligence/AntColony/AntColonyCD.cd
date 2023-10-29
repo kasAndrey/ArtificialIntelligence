@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="ArtificialIntelligence.AntColony.AntColonyForm">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <Members>
+      <Field Name="alphaNumeric" Hidden="true" />
+      <Field Name="alphaTrackBar" Hidden="true" />
+      <Field Name="betaNumeric" Hidden="true" />
+      <Field Name="betaTrackBar" Hidden="true" />
+      <Field Name="components" Hidden="true" />
+      <Method Name="Dispose" Hidden="true" />
+      <Field Name="evapLabel" Hidden="true" />
+      <Field Name="evapNumeric" Hidden="true" />
+      <Field Name="evapTrackBar" Hidden="true" />
+      <Field Name="graphPictureBox" Hidden="true" />
+      <Method Name="InitializeComponent" Hidden="true" />
+      <Field Name="loadGraphButton" Hidden="true" />
+      <Field Name="maxRepeatsLabel" Hidden="true" />
+      <Field Name="maxRepeatsNumeric" Hidden="true" />
+      <Field Name="nextAntButton" Hidden="true" />
+      <Field Name="ogfd" Hidden="true" />
+      <Field Name="pdwLabel" Hidden="true" />
+      <Field Name="pherStrengthLabel" Hidden="true" />
+      <Field Name="pherStrengthNumeric" Hidden="true" />
+      <Field Name="pherStrengthTrackBar" Hidden="true" />
+      <Field Name="plwLabel" Hidden="true" />
+      <Field Name="resultLabel" Hidden="true" />
+      <Field Name="startStopButton" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>BAAATAAgAiIgAEECCBCAABQCCEAABRgAAACBASAAAQE=</HashCode>
+      <FileName>AntColony\AntColonyForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArtificialIntelligence.AntColony.AntColonyOptimization">
+    <Position X="3" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAIEAAAAAAQAAAEGAAACBAAACAAAAggCAQASAAAEAAA=</HashCode>
+      <FileName>AntColony\AntColonyOptimization.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArtificialIntelligence.AntColony.DisplayableVertex">
+    <Position X="9.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAQAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>AntColony\DisplayableGraph.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArtificialIntelligence.AntColony.DisplayableGraphPath">
+    <Position X="5.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAQAAAAAAAAAAAACAA=</HashCode>
+      <FileName>AntColony\DisplayableGraph.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArtificialIntelligence.AntColony.DisplayableGraph">
+    <Position X="10.25" Y="3.25" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AQKAACAAAAAAIgAAAAAAAAAAAQAAAAEAEAAAAAMgAAA=</HashCode>
+      <FileName>AntColony\DisplayableGraph.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArtificialIntelligence.AntColony.GraphParser">
+    <Position X="14.75" Y="2.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AntColony\GraphParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArtificialIntelligence.MathObjects.GraphEdge">
+    <Position X="11.75" Y="0.5" Width="2" />
+    <NestedTypes>
+      <Enum Name="ArtificialIntelligence.MathObjects.GraphEdge.EdgeType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>MathObjects\Graph.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAQAAAAAAAAAAAAIAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MathObjects\Graph.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArtificialIntelligence.MathObjects.GraphPath">
+    <Position X="6" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAoAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MathObjects\Graph.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArtificialIntelligence.MathObjects.Graph">
+    <Position X="7.75" Y="4.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAEAAAAAAAAAAAICAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MathObjects\Graph.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArtificialIntelligence.MathObjects.Matrix" Collapsed="true">
+    <Position X="6" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAEAEaAEAAAAAAAAAAAAAAAAQAAgAAAA=</HashCode>
+      <FileName>MathObjects\Matrix.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArtificialIntelligence.MathObjects.MathDefs">
+    <Position X="14.75" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>MathObjects\MathDefs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

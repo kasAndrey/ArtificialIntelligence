@@ -1,10 +1,10 @@
 ﻿using ArtificialIntelligence.MathObjects;
 
-namespace ArtificialIntelligence.AntColony
+namespace ArtificialIntelligence.GraphicsMGMT
 {
     static class GraphParser
     {
-        public const string GraphsDirectory = @"..\..\..\AntColony\Graphs\";
+        public const string GraphsDirectory = @"..\..\..\Resources\Graphs\";
 
         public static DisplayableGraph Load(string path)
         {

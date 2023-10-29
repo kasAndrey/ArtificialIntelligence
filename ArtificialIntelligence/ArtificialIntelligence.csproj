@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ParticleSworm\Functions\" />
+    <Folder Include="Resources\Functions\" />
   </ItemGroup>
 
 </Project>

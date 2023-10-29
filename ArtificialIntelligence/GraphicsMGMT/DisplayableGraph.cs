@@ -1,7 +1,7 @@
 ﻿using ArtificialIntelligence.MathObjects;
 using static ArtificialIntelligence.MathObjects.MathDefs;
 
-namespace ArtificialIntelligence.AntColony
+namespace ArtificialIntelligence.GraphicsMGMT
 {
     public class DisplayableVertex
     {
@@ -68,7 +68,7 @@ namespace ArtificialIntelligence.AntColony
 
         public DisplayableGraph(DisplayableVertex[] vertices, GraphEdge[] edges) : base(vertices.Length, edges)
         {
-            Vertices = vertices; 
+            Vertices = vertices;
             vertexPen = new Pen(Color.Black);
             edgePen = new Pen(Color.Black)
             {
@@ -130,7 +130,7 @@ namespace ArtificialIntelligence.AntColony
             for (int i = 1; i < path.Count + (loop ? 1 : 0); i++)
             {
                 DisplayableVertex first = Vertices[path[i - 1]], second = Vertices[path[i % path.Count]];
-                Vector direction = new Vector((double)(second.X - first.X), (double)(second.Y - first.Y)).Normalized();
+                Vector direction = new Vector((double)(second.X - first.X), second.Y - first.Y).Normalized();
                 Point midpoint = new((first.X + second.X) / 2 - (int)(curveCoeff * direction[1]), (first.Y + second.Y) / 2 + (int)(curveCoeff * direction[0]));
 
                 g.DrawCurve(pathPen, new Point[] { new Point(first.X, first.Y), midpoint, new Point(second.X, second.Y) });
@@ -144,16 +144,16 @@ namespace ArtificialIntelligence.AntColony
 
             DisplayableVertex first = Vertices[firstIndex], second = Vertices[secondIndex];
 
-            Vector direction = new Vector((double)(second.X - first.X), (double)(second.Y - first.Y)).Normalized();
+            Vector direction = new Vector((double)(second.X - first.X), second.Y - first.Y).Normalized();
             Point realFirst = new(first.X + (int)(direction[0] * vertexSize / 2), first.Y + (int)(direction[1] * vertexSize / 2));
             Point realSecond = new(second.X - (int)(direction[0] * vertexSize / 2), second.Y - (int)(direction[1] * vertexSize / 2));
-            
+
             Point midpoint = new((realFirst.X + realSecond.X) / 2 - (int)(curveCoeff * direction[1]), (realFirst.Y + realSecond.Y) / 2 + (int)(curveCoeff * direction[0]));
 
             g.DrawCurve(edgePen, new Point[] { realFirst, midpoint, realSecond });
 
             Vector arrowLDirection = Rotate2(direction, angle), arrowRDirection = Rotate2(direction, -angle);
-            
+
             Point arrowL = new(midpoint.X - (int)(arrowLDirection[0] * length), midpoint.Y - (int)(arrowLDirection[1] * length));
             Point arrowR = new(midpoint.X - (int)(arrowRDirection[0] * length), midpoint.Y - (int)(arrowRDirection[1] * length));
             g.DrawLine(edgePen, midpoint, arrowL);

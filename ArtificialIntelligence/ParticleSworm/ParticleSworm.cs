@@ -1,4 +1,4 @@
-﻿
+﻿using ArtificialIntelligence.GraphicsMGMT;
 using ArtificialIntelligence.MathObjects;
 
 namespace ArtificialIntelligence.ParticleSworm

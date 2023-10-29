@@ -1,11 +1,12 @@
-﻿using ArtificialIntelligence.MathObjects;
+﻿using ArtificialIntelligence.GraphicsMGMT;
+using ArtificialIntelligence.MathObjects;
 namespace ArtificialIntelligence.ParticleSworm
 {
     public partial class ParticleSwormForm : Form
     {
         ParticleSworm? ps;
         Function f;
-        const string pathToImages = @"..\..\..\ParticleSworm\Functions\";
+        const string pathToImages = @"..\..\..\Resources\Functions\";
         const string imagesExtension = ".jpg";
 
         readonly Dictionary<string, Function> possibleFunctions = new()
@@ -30,6 +31,7 @@ namespace ArtificialIntelligence.ParticleSworm
         Image functionPlot;
         Graphics graphics;
         bool simulationStarted;
+
 
         public ParticleSwormForm()
         {
@@ -57,6 +59,7 @@ namespace ArtificialIntelligence.ParticleSworm
 
         private void DrawPoint(Vector p, in Graphics g, int size = 20)
         {
+            //graphics = plot.CreateGraphics();
             Vector realPos = new((p[0] - f.Bounds.X) * plot.Width / f.Bounds.Width, (p[1] - f.Bounds.Y) * plot.Height / f.Bounds.Height);
             g.FillEllipse(new SolidBrush(Color.White), (int)realPos[0] - size / 2, (int)realPos[1] - size / 2, size, size);
             g.DrawEllipse(new Pen(Color.Black), (int)realPos[0] - size / 2, (int)realPos[1] - size / 2, size, size);
@@ -68,6 +71,7 @@ namespace ArtificialIntelligence.ParticleSworm
             startButton.Text = "Stop Simulation";
             startButton.Click -= Start;
             startButton.Click += Stop;
+            graphics = plot.CreateGraphics();
             StartSimulation();
         }
 

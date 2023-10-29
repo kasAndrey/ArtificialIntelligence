@@ -1,4 +1,4 @@
-﻿namespace ArtificialIntelligence.ParticleSworm
+﻿namespace ArtificialIntelligence.GraphicsMGMT
 {
     public class Function
     {
@@ -11,6 +11,4 @@
             Bounds = bounds;
         }
     }
-
-
 }

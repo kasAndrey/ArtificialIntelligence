@@ -25,6 +25,14 @@
     {
         public GraphPath() : base() { }
 
+        public GraphPath(List<int> other)
+        {
+            foreach (int i in other)
+            {
+                Add(i);
+            }
+        }
+
         protected const string goesTo = "->";
 
         public bool ContainPath(int first, int second)
@@ -49,6 +57,17 @@
             if (Count == 0) return "";
 
             return ToString() + (loop ? $" {goesTo} {this[0]}" : "");
+        }
+
+        public double Distance(in Graph graph, bool loop = false)
+        {
+            double result = 0;
+            for (int i = 1; i < Count; i++)
+            {
+                result += graph[this[i - 1], this[i]];
+            }
+            result += loop ? graph[this.Last(), this[0]] : 0;
+            return result;
         }
     }
 

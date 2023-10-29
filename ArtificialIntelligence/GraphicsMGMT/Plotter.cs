@@ -1,4 +1,4 @@
-﻿namespace ArtificialIntelligence.ParticleSworm
+﻿namespace ArtificialIntelligence.GraphicsMGMT
 {
     using Gradient = List<Color>;
 

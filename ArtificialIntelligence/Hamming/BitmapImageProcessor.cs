@@ -8,7 +8,7 @@ namespace ArtificialIntelligence.Hamming
         const int WHITE = 0xFFFFFF;
         //const int BLACK = 0x000000;
 
-        public const string ImagesDirectory = @"..\..\..\Hamming\Images\";
+        public const string ImagesDirectory = @"..\..\..\Resources\Images\";
         public static Vector LoadPicture(string path)
         {
             Bitmap bmp = (Bitmap)Image.FromFile(path);
