@@ -1,13 +1,15 @@
 using ArtificialIntelligence.Hamming;
 using ArtificialIntelligence.AntColony;
 using ArtificialIntelligence.ParticleSworm;
-using ArtificialIntelligence.GenericAlgorithm;
+using ArtificialIntelligence.GeneticAlgorithm;
+using ArtificialIntelligence.SimulatedAnnealing;
 
 namespace ArtificialIntelligence
 {
     public partial class MainWindow : Form
     {
         private Dictionary<string, Form> allForms = new();
+        private Button? currentFormButton;
 
         public MainWindow()
         {
@@ -17,6 +19,7 @@ namespace ArtificialIntelligence
             CreateNewForm("Ant Colony Optimization", new AntColonyForm());
             CreateNewForm("Particle Sworm", new ParticleSwormForm());
             CreateNewForm("Genetic Algorithm", new GeneticAlgorithmForm());
+            CreateNewForm("Simulated Annealing", new SimulatedAnnealingForm());
         }
 
         private void CreateNewForm(string description, Form form)
@@ -31,7 +34,6 @@ namespace ArtificialIntelligence
             Button btn = new()
             {
                 Text = description,
-                Tag = description,
                 Size = new Size(150, 50)
             };
             btn.Click += ShowFormInContainer;
@@ -43,10 +45,16 @@ namespace ArtificialIntelligence
         {
             ContainerForForms.Controls.Clear();
 
-            string description = (sender as Button)!.Text;
+            if (currentFormButton is not null)
+            {
+                currentFormButton.BackColor = Color.White;
+            }
 
-            ContainerForForms.Text = description;
-            ContainerForForms.Controls.Add(allForms[description]);
+            currentFormButton = (sender as Button)!;
+            currentFormButton.BackColor = Color.LightYellow;
+
+            ContainerForForms.Text = currentFormButton.Text;
+            ContainerForForms.Controls.Add(allForms[currentFormButton.Text]);
         }
     }
 }
