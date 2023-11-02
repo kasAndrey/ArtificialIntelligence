@@ -1,4 +1,5 @@
-﻿using ArtificialIntelligence.MathObjects;
+﻿using ArtificialIntelligence.GraphicsMGMT;
+using ArtificialIntelligence.MathObjects;
 
 namespace ArtificialIntelligence.SimulatedAnnealing
 {
@@ -8,6 +9,7 @@ namespace ArtificialIntelligence.SimulatedAnnealing
         public GraphPath Solution;
         private Graph graph;
         private Random rnd;
+        public GraphPath BestSolution;
 
         public SimulatedAnnealing(Graph graph, in Random randomValue)
         {
@@ -19,6 +21,8 @@ namespace ArtificialIntelligence.SimulatedAnnealing
             {
                 Solution.Add(i);
             }
+
+            BestSolution = Solution;
 
             for (int i = 1; i < Solution.Count; i++)
             {
@@ -44,12 +48,14 @@ namespace ArtificialIntelligence.SimulatedAnnealing
                 Solution = newPath;
             }
 
+            if (dE < 0) BestSolution = new GraphPath (Solution);
+
             return Temperature <= 0;
         }
 
         private void ChangeTemperature(double a1 = 1, double a0 = 1)
         {
-            Temperature = a1 * Temperature - a0 * 1;
+            Temperature = a1 * Temperature - a0;
             if (Temperature < 0) Temperature = 0;
         }
 
