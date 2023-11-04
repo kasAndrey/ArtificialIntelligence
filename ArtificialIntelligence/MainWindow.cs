@@ -20,6 +20,9 @@ namespace ArtificialIntelligence
             CreateNewForm("Particle Sworm", new ParticleSwormForm());
             CreateNewForm("Genetic Algorithm", new GeneticAlgorithmForm());
             CreateNewForm("Simulated Annealing", new SimulatedAnnealingForm());
+            CreateNewForm("Hebbian Learning Rule", new Form());
+            CreateNewForm("Fuzzy logic", new Form());
+            CreateNewForm("Data mining", new Form());
         }
 
         private void CreateNewForm(string description, Form form)
@@ -34,7 +37,7 @@ namespace ArtificialIntelligence
             Button btn = new()
             {
                 Text = description,
-                Size = new Size(150, 50)
+                Size = new Size(150, buttonsPanel.Height - 25)
             };
             btn.Click += ShowFormInContainer;
 
