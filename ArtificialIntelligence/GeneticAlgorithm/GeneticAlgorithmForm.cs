@@ -6,6 +6,7 @@ namespace ArtificialIntelligence.GeneticAlgorithm
     public partial class GeneticAlgorithmForm : Form
     {
         GeneticAlgorithm? ga;
+        EntityCodingType codingType;
         Function f;
         const string pathToImages = @"..\..\..\Resources\Functions\";
         const string imagesExtension = ".jpg";
@@ -40,7 +41,12 @@ namespace ArtificialIntelligence.GeneticAlgorithm
             graphics = plot.CreateGraphics();
             functions.Items.Clear();
             functions.Items.AddRange(possibleFunctions.Keys.ToArray());
+
+            codingTypeComboBox.Items.Clear();
+            codingTypeComboBox.Items.AddRange(Enum.GetNames(typeof(EntityCodingType)));
             SetFunction(this, new EventArgs());
+
+            boundsButton.Click += (object sender, EventArgs e) => new Bounds(ref f.Bounds, this).Show();
         }
 
         private void FindMinimumValue(object sender, EventArgs e)
@@ -50,7 +56,7 @@ namespace ArtificialIntelligence.GeneticAlgorithm
             graphics.Clear(Color.White);
             graphics.DrawImage(functionPlot, 0, 0, plot.Width, plot.Height);
 
-            ga = new((int)generationEntitiesCount.Value, f, (double)crossingoverPossibility.Value, (double)mutationPossibility.Value, spawnOption.Checked);
+            ga = new((int)generationEntitiesCount.Value, f, codingType, (double)crossingoverPossibility.Value, (double)populationValue.Value, (double)mutationPossibility.Value);
             Vector result = ga.FindMinimum();
             resultLabel.Text = $"Result: f({result[0]:F3}, {result[1]:F3}) = {f.F(result[0], result[1]):F3}";
 
@@ -68,6 +74,8 @@ namespace ArtificialIntelligence.GeneticAlgorithm
         private void Start(object sender, EventArgs e)
         {
             simulationStarted = true;
+            foreach (Control c in Controls) c.Enabled = false;
+            startButton.Enabled = true;
             startButton.Text = "Stop Simulation";
             startButton.Click -= Start;
             startButton.Click += Stop;
@@ -77,6 +85,7 @@ namespace ArtificialIntelligence.GeneticAlgorithm
 
         private void Stop(object sender, EventArgs e)
         {
+            foreach (Control c in Controls) c.Enabled = true;
             simulationStarted = false;
             startButton.Text = "Start Simulation";
             startButton.Click -= Stop;
@@ -91,13 +100,13 @@ namespace ArtificialIntelligence.GeneticAlgorithm
             Vector minimum = new(2);
             await Task.Run(() =>
             {
-                ga = new((int)generationEntitiesCount.Value, f, (double)crossingoverPossibility.Value, (double)mutationPossibility.Value, spawnOption.Checked);
+                ga = new((int)generationEntitiesCount.Value, f, codingType, (double)crossingoverPossibility.Value, (double)populationValue.Value, (double)mutationPossibility.Value);
                 while (simulationStarted)
                 {
                     minimum = ga.NextGeneration();
 
                     g.Clear(Color.Transparent);
-                    foreach (GeneticAlgorithm.Entity e in ga.Entities) DrawPoint(e.RealPosition(ref f.Bounds), g, 8);
+                    foreach (Entity e in ga.Entities) DrawPoint(e.GeneCoding.RealPosition(ref f.Bounds), g, 8);
 
                     graphics.DrawImage(functionPlot, 0, 0, plot.Width, plot.Height);
                     graphics.DrawImage(image, 0, 0, plot.Width, plot.Height);
@@ -127,6 +136,18 @@ namespace ArtificialIntelligence.GeneticAlgorithm
 
             functionPlot = Plotter.DrawFunction(f, 75);
 
+            plot.Image = functionPlot;
+        }
+
+        private void SetCodingType(object sender, EventArgs e)
+        {
+            codingType = (EntityCodingType)Enum.Parse(typeof(EntityCodingType), codingTypeComboBox.Text);
+        }
+
+        public void SetFunctionBounds(RectangleF newBnd)
+        {
+            f.Bounds = newBnd;
+            functionPlot = Plotter.DrawFunction(f, 75);
             plot.Image = functionPlot;
         }
     }

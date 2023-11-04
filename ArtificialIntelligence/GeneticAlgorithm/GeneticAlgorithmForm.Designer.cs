@@ -40,18 +40,24 @@
             crossingoverPossibility = new NumericUpDown();
             mutationPossibilityLabel = new Label();
             mutationPossibility = new NumericUpDown();
-            spawnOption = new CheckBox();
+            populationValue = new NumericUpDown();
+            populationLabel = new Label();
+            codingTypeComboBox = new ComboBox();
+            codingTypeLabel = new Label();
+            functionLabel = new Label();
+            boundsButton = new Button();
             ((System.ComponentModel.ISupportInitialize)formulaImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)plot).BeginInit();
             ((System.ComponentModel.ISupportInitialize)generationEntitiesCount).BeginInit();
             ((System.ComponentModel.ISupportInitialize)crossingoverPossibility).BeginInit();
             ((System.ComponentModel.ISupportInitialize)mutationPossibility).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)populationValue).BeginInit();
             SuspendLayout();
             // 
             // formulaImage
             // 
             formulaImage.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            formulaImage.Location = new Point(594, 202);
+            formulaImage.Location = new Point(507, 234);
             formulaImage.Name = "formulaImage";
             formulaImage.Size = new Size(194, 51);
             formulaImage.SizeMode = PictureBoxSizeMode.Zoom;
@@ -71,7 +77,7 @@
             // startButton
             // 
             startButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            startButton.Location = new Point(616, 363);
+            startButton.Location = new Point(578, 363);
             startButton.Name = "startButton";
             startButton.Size = new Size(141, 56);
             startButton.TabIndex = 9;
@@ -82,7 +88,7 @@
             // findMinimumButton
             // 
             findMinimumButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            findMinimumButton.Location = new Point(616, 301);
+            findMinimumButton.Location = new Point(578, 301);
             findMinimumButton.Name = "findMinimumButton";
             findMinimumButton.Size = new Size(141, 56);
             findMinimumButton.TabIndex = 10;
@@ -96,9 +102,9 @@
             functions.DisplayMember = "Function 1";
             functions.FormattingEnabled = true;
             functions.Items.AddRange(new object[] { "Function 1", "Function 2", "Function 3", "Function 4", "Function 5" });
-            functions.Location = new Point(594, 168);
+            functions.Location = new Point(507, 200);
             functions.Name = "functions";
-            functions.Size = new Size(194, 28);
+            functions.Size = new Size(139, 28);
             functions.TabIndex = 8;
             functions.Text = "Function 1";
             functions.SelectedValueChanged += SetFunction;
@@ -110,7 +116,7 @@
             plot.BorderStyle = BorderStyle.FixedSingle;
             plot.Location = new Point(11, 9);
             plot.Name = "plot";
-            plot.Size = new Size(519, 410);
+            plot.Size = new Size(490, 410);
             plot.SizeMode = PictureBoxSizeMode.StretchImage;
             plot.TabIndex = 7;
             plot.TabStop = false;
@@ -119,7 +125,7 @@
             // 
             generationEntitiesCountLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             generationEntitiesCountLabel.AutoSize = true;
-            generationEntitiesCountLabel.Location = new Point(553, 21);
+            generationEntitiesCountLabel.Location = new Point(507, 21);
             generationEntitiesCountLabel.Name = "generationEntitiesCountLabel";
             generationEntitiesCountLabel.Size = new Size(144, 20);
             generationEntitiesCountLabel.TabIndex = 14;
@@ -140,7 +146,7 @@
             // 
             crossingoverPossibilityLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             crossingoverPossibilityLabel.AutoSize = true;
-            crossingoverPossibilityLabel.Location = new Point(553, 54);
+            crossingoverPossibilityLabel.Location = new Point(507, 54);
             crossingoverPossibilityLabel.Name = "crossingoverPossibilityLabel";
             crossingoverPossibilityLabel.Size = new Size(166, 20);
             crossingoverPossibilityLabel.TabIndex = 16;
@@ -163,7 +169,7 @@
             // 
             mutationPossibilityLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             mutationPossibilityLabel.AutoSize = true;
-            mutationPossibilityLabel.Location = new Point(553, 87);
+            mutationPossibilityLabel.Location = new Point(507, 120);
             mutationPossibilityLabel.Name = "mutationPossibilityLabel";
             mutationPossibilityLabel.Size = new Size(141, 20);
             mutationPossibilityLabel.TabIndex = 18;
@@ -174,7 +180,7 @@
             mutationPossibility.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             mutationPossibility.DecimalPlaces = 2;
             mutationPossibility.Increment = new decimal(new int[] { 2, 0, 0, 131072 });
-            mutationPossibility.Location = new Point(725, 85);
+            mutationPossibility.Location = new Point(725, 118);
             mutationPossibility.Maximum = new decimal(new int[] { 10, 0, 0, 65536 });
             mutationPossibility.Minimum = new decimal(new int[] { 1, 0, 0, 65536 });
             mutationPossibility.Name = "mutationPossibility";
@@ -182,27 +188,83 @@
             mutationPossibility.TabIndex = 17;
             mutationPossibility.Value = new decimal(new int[] { 25, 0, 0, 131072 });
             // 
-            // spawnOption
+            // populationValue
             // 
-            spawnOption.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            spawnOption.AutoSize = true;
-            spawnOption.Checked = true;
-            spawnOption.CheckState = CheckState.Checked;
-            spawnOption.Location = new Point(549, 127);
-            spawnOption.Name = "spawnOption";
-            spawnOption.RightToLeft = RightToLeft.Yes;
-            spawnOption.Size = new Size(239, 24);
-            spawnOption.TabIndex = 19;
-            spawnOption.Text = "Spawn Random To Const Count";
-            spawnOption.UseVisualStyleBackColor = true;
+            populationValue.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            populationValue.DecimalPlaces = 2;
+            populationValue.Increment = new decimal(new int[] { 2, 0, 0, 131072 });
+            populationValue.Location = new Point(725, 85);
+            populationValue.Maximum = new decimal(new int[] { 10, 0, 0, 65536 });
+            populationValue.Minimum = new decimal(new int[] { 1, 0, 0, 65536 });
+            populationValue.Name = "populationValue";
+            populationValue.Size = new Size(63, 27);
+            populationValue.TabIndex = 17;
+            populationValue.Value = new decimal(new int[] { 5, 0, 0, 65536 });
+            // 
+            // populationLabel
+            // 
+            populationLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            populationLabel.AutoSize = true;
+            populationLabel.Location = new Point(507, 87);
+            populationLabel.Name = "populationLabel";
+            populationLabel.Size = new Size(212, 20);
+            populationLabel.TabIndex = 18;
+            populationLabel.Text = "Population Crossingover Value:";
+            // 
+            // codingTypeComboBox
+            // 
+            codingTypeComboBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            codingTypeComboBox.DisplayMember = "Binary";
+            codingTypeComboBox.FormattingEnabled = true;
+            codingTypeComboBox.Items.AddRange(new object[] { "Binary", "Real" });
+            codingTypeComboBox.Location = new Point(652, 200);
+            codingTypeComboBox.Name = "codingTypeComboBox";
+            codingTypeComboBox.Size = new Size(136, 28);
+            codingTypeComboBox.TabIndex = 8;
+            codingTypeComboBox.Text = "Binary";
+            codingTypeComboBox.SelectedIndexChanged += SetCodingType;
+            codingTypeComboBox.SelectedValueChanged += SetFunction;
+            // 
+            // codingTypeLabel
+            // 
+            codingTypeLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            codingTypeLabel.Location = new Point(652, 166);
+            codingTypeLabel.Name = "codingTypeLabel";
+            codingTypeLabel.Size = new Size(136, 25);
+            codingTypeLabel.TabIndex = 19;
+            codingTypeLabel.Text = "Coding Type";
+            codingTypeLabel.TextAlign = ContentAlignment.BottomCenter;
+            // 
+            // functionLabel
+            // 
+            functionLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            functionLabel.Location = new Point(507, 166);
+            functionLabel.Name = "functionLabel";
+            functionLabel.Size = new Size(139, 25);
+            functionLabel.TabIndex = 19;
+            functionLabel.Text = "Function";
+            functionLabel.TextAlign = ContentAlignment.BottomCenter;
+            // 
+            // boundsButton
+            // 
+            boundsButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            boundsButton.Location = new Point(707, 234);
+            boundsButton.Name = "boundsButton";
+            boundsButton.Size = new Size(81, 51);
+            boundsButton.TabIndex = 10;
+            boundsButton.Text = "Modify Bounds";
+            boundsButton.UseVisualStyleBackColor = true;
             // 
             // GeneticAlgorithmForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(spawnOption);
+            Controls.Add(functionLabel);
+            Controls.Add(codingTypeLabel);
+            Controls.Add(populationLabel);
             Controls.Add(mutationPossibilityLabel);
+            Controls.Add(populationValue);
             Controls.Add(mutationPossibility);
             Controls.Add(crossingoverPossibilityLabel);
             Controls.Add(crossingoverPossibility);
@@ -211,7 +273,9 @@
             Controls.Add(formulaImage);
             Controls.Add(resultLabel);
             Controls.Add(startButton);
+            Controls.Add(boundsButton);
             Controls.Add(findMinimumButton);
+            Controls.Add(codingTypeComboBox);
             Controls.Add(functions);
             Controls.Add(plot);
             Name = "GeneticAlgorithmForm";
@@ -221,6 +285,7 @@
             ((System.ComponentModel.ISupportInitialize)generationEntitiesCount).EndInit();
             ((System.ComponentModel.ISupportInitialize)crossingoverPossibility).EndInit();
             ((System.ComponentModel.ISupportInitialize)mutationPossibility).EndInit();
+            ((System.ComponentModel.ISupportInitialize)populationValue).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -239,6 +304,11 @@
         private NumericUpDown crossingoverPossibility;
         private Label mutationPossibilityLabel;
         private NumericUpDown mutationPossibility;
-        private CheckBox spawnOption;
+        private NumericUpDown populationValue;
+        private Label populationLabel;
+        private ComboBox codingTypeComboBox;
+        private Label codingTypeLabel;
+        private Label functionLabel;
+        private Button boundsButton;
     }
 }

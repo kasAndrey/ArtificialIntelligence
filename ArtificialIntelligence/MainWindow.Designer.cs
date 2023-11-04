@@ -35,11 +35,11 @@
             // ContainerForForms
             // 
             ContainerForForms.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            ContainerForForms.Location = new Point(14, 84);
+            ContainerForForms.Location = new Point(14, 99);
             ContainerForForms.Margin = new Padding(3, 4, 3, 4);
             ContainerForForms.Name = "ContainerForForms";
             ContainerForForms.Padding = new Padding(3, 4, 3, 4);
-            ContainerForForms.Size = new Size(804, 492);
+            ContainerForForms.Size = new Size(804, 477);
             ContainerForForms.TabIndex = 0;
             ContainerForForms.TabStop = false;
             // 
@@ -50,7 +50,7 @@
             buttonsPanel.Location = new Point(14, 16);
             buttonsPanel.Margin = new Padding(3, 4, 3, 4);
             buttonsPanel.Name = "buttonsPanel";
-            buttonsPanel.Size = new Size(804, 60);
+            buttonsPanel.Size = new Size(804, 75);
             buttonsPanel.TabIndex = 1;
             buttonsPanel.WrapContents = false;
             // 
