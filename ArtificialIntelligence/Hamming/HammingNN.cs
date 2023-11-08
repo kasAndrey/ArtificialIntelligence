@@ -3,7 +3,7 @@ using ArtificialIntelligence.NeuralNetwork;
 
 namespace ArtificialIntelligence.Hamming
 {
-    public class HammingNN
+    public class HammingNN : INeuralNetwork
     {
         private const double maxSqrError = 1e-2;
 

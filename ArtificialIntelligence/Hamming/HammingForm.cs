@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using ArtificialIntelligence.GraphicsMGMT;
 using ArtificialIntelligence.MathObjects;
 
 namespace ArtificialIntelligence.Hamming
@@ -37,13 +38,13 @@ namespace ArtificialIntelligence.Hamming
             {
                 int referencePictureIndex = neuralNetwork.Recognize(BitmapImageProcessor.LoadPicture(ofd.FileName));
 
-                inputImage.Image = ResizedImage(Image.FromFile(ofd.FileName));
+                inputImage.Image = BitmapImageProcessor.ResizedImage(Image.FromFile(ofd.FileName), outputImage.Size);
 
                 if (referencePictureIndex != -1)
                 {
                     uiTextOutput.Text = "Unknown image should be Image #" + (referencePictureIndex + 1) + ".";
                     uiTextOutput.ForeColor = Color.Black;
-                    outputImage.Image = ResizedImage(Image.FromFile(referenceImageFiles[referencePictureIndex].FullName));
+                    outputImage.Image = BitmapImageProcessor.ResizedImage(Image.FromFile(referenceImageFiles[referencePictureIndex].FullName), outputImage.Size);
                 }
                 else
                 {
@@ -56,18 +57,6 @@ namespace ArtificialIntelligence.Hamming
             {
                 MessageBox.Show(exc.Message, "Error occured", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private Image ResizedImage(Image original)
-        {
-            Bitmap bmp = new(300, 300);
-
-            var g = Graphics.FromImage(bmp);
-            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-            g.DrawImage(original, 0, 0, bmp.Width, bmp.Height);
-            g.Save();
-
-            return bmp;
         }
     }
 }

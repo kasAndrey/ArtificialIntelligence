@@ -1,4 +1,6 @@
-﻿namespace ArtificialIntelligence.MathObjects
+﻿using System.Linq.Expressions;
+
+namespace ArtificialIntelligence.MathObjects
 {
     public class Matrix
     {
@@ -48,6 +50,23 @@
             }
             return c;
         }
+
+        public static bool operator==(Matrix A, Matrix B)
+        {
+            if (A.Columns != B.Columns || A.Rows != B.Rows) return false;
+
+            for (int i = 0; i < A.Rows; i++)
+            {
+                for (int j = 0; j < A.Columns; j++)
+                {
+                    if (A[i, j] != B[i, j]) return false;
+                }
+            }
+
+            return true;
+        }
+
+        public static bool operator !=(Matrix A, Matrix B) => !(A == B);
 
         public static Matrix operator + (Matrix A, Matrix B)
         {

@@ -1,6 +1,6 @@
 ﻿using ArtificialIntelligence.MathObjects;
 
-namespace ArtificialIntelligence.Hamming
+namespace ArtificialIntelligence.GraphicsMGMT
 {
     static class BitmapImageProcessor
     {
@@ -22,6 +22,18 @@ namespace ArtificialIntelligence.Hamming
                 }
             }
             return a;
+        }
+
+        public static Image ResizedImage(Image original, Size newSize)
+        {
+            Bitmap bmp = new(newSize.Width, newSize.Height);
+
+            var g = Graphics.FromImage(bmp);
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            g.DrawImage(original, 0, 0, bmp.Width, bmp.Height);
+            g.Save();
+
+            return bmp;
         }
     }
 }

@@ -3,6 +3,7 @@ using ArtificialIntelligence.AntColony;
 using ArtificialIntelligence.ParticleSworm;
 using ArtificialIntelligence.GeneticAlgorithm;
 using ArtificialIntelligence.SimulatedAnnealing;
+using ArtificialIntelligence.HebbianLearningRule;
 
 namespace ArtificialIntelligence
 {
@@ -20,7 +21,7 @@ namespace ArtificialIntelligence
             CreateNewForm("Particle Sworm", new ParticleSwormForm());
             CreateNewForm("Genetic Algorithm", new GeneticAlgorithmForm());
             CreateNewForm("Simulated Annealing", new SimulatedAnnealingForm());
-            CreateNewForm("Hebbian Learning Rule", new Form());
+            CreateNewForm("Hebbian Learning Rule", new HebbianNNForm());
             CreateNewForm("Fuzzy logic", new Form());
             CreateNewForm("Data mining", new Form());
         }
