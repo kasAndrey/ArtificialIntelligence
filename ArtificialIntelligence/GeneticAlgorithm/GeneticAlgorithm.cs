@@ -32,7 +32,7 @@ namespace ArtificialIntelligence.GeneticAlgorithm
             {
                 IEntityGeneCoding coding = type switch
                 {
-                    EntityCodingType.Binary => new BinaryGeneCoding((uint)(rnd.NextDouble() * ~0u), (uint)(rnd.NextDouble() * ~0u)),
+                    EntityCodingType.Binary => new GrayCode((uint)(rnd.NextDouble() * ~0u), (uint)(rnd.NextDouble() * ~0u)),
                     EntityCodingType.Real => new RealGeneCoding(rnd.NextDouble(), rnd.NextDouble()),
                     _ => throw new NotImplementedException()
                 };

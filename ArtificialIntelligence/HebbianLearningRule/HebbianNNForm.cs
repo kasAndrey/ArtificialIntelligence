@@ -9,7 +9,7 @@ namespace ArtificialIntelligence.HebbianLearningRule
         private const int imagesCount = 4;
 
         private HebbianNN neuralNetwork;
-        FileInfo[] referenceImageFiles;
+        private FileInfo[] referenceImageFiles;
 
         public HebbianNNForm()
         {
@@ -52,7 +52,16 @@ namespace ArtificialIntelligence.HebbianLearningRule
                 referenceImages[i] = BitmapImageProcessor.LoadPicture(referenceImageFiles[i].FullName);
             }
 
-            neuralNetwork.Train(referenceImages);
+            try
+            {
+                neuralNetwork.Train(referenceImages);
+            }
+            catch (ArgumentException exc)
+            {
+                MessageBox.Show(exc.Message, "Error occured", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
 
             imagesLoadedLabel.Visible = true;
             openFileButton.Enabled = true;

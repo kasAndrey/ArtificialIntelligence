@@ -16,7 +16,7 @@ namespace ArtificialIntelligence.ParticleSworm
 
             readonly Random randomNumber;
 
-            public Particle(ref RectangleF field, ref Random seed)
+            public Particle(in RectangleF field, in Random seed)
             {
                 randomNumber = seed;
 
@@ -54,7 +54,7 @@ namespace ArtificialIntelligence.ParticleSworm
 
             for (int i = 0; i < particleCount; i++)
             {
-                Particles[i] = new(ref f.Bounds, ref rand);
+                Particles[i] = new(f.Bounds, rand);
             }
 
             globalBestPoint = GetBestPoint();

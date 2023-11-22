@@ -1,11 +1,13 @@
 ﻿namespace ArtificialIntelligence.GraphicsMGMT
 {
+    using TestFunction = Func<double, double, double>;
+
     public class Function
     {
-        public Func<double, double, double> F;
+        public TestFunction F;
         public RectangleF Bounds;
 
-        public Function(Func<double, double, double> f, RectangleF bounds)
+        public Function(TestFunction f, RectangleF bounds)
         {
             F = f;
             Bounds = bounds;

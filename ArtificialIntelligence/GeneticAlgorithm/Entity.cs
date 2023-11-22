@@ -57,14 +57,38 @@ namespace ArtificialIntelligence.GeneticAlgorithm
         }
     }
 
+    public class GrayCode : BinaryGeneCoding
+    {
+        public GrayCode(uint bitsX, uint bitsY) : base(bitsX, bitsY) { }
+
+        public new Vector RealPosition(ref RectangleF field)
+        {
+            uint oldPosX = PositionX, oldPosY = PositionY;
+            uint realPosX, realPosY;
+            for (realPosX = 0; oldPosX != 0; oldPosX >>= 1)
+            {
+                realPosX ^= oldPosX;
+            }
+            for (realPosY = 0; oldPosY != 0; oldPosY >>= 1)
+            {
+                realPosY ^= oldPosY;
+            }
+
+            return new(
+                (double)realPosX / uint.MaxValue * field.Width + field.Left,
+                (double)realPosY / uint.MaxValue * field.Height + field.Top
+                );
+        }
+    }
+
     public class RealGeneCoding : IEntityGeneCoding
     {
         public double PositionX, PositionY;
 
         public RealGeneCoding(double positionX, double positionY)
         {
-            PositionX = positionX;
-            PositionY = positionY;
+            PositionX = positionX > 1 ? 1 : positionX < 0 ? 0 : positionX;
+            PositionY = positionY > 1 ? 1 : positionY < 0 ? 0 : positionY;
         }
 
         public IEntityGeneCoding CrossingoverWith(IEntityGeneCoding other, ref Random rnd)
@@ -76,13 +100,18 @@ namespace ArtificialIntelligence.GeneticAlgorithm
             double newX = weightX * PositionX + (1 - weightX) * (other as RealGeneCoding)!.PositionX;
             double newY = weightY * PositionY + (1 - weightY) * (other as RealGeneCoding)!.PositionY;
 
+            newX = newX > 1 ? 1 : newX < 0 ? 0 : newX;
+            newY = newY > 1 ? 1 : newY < 0 ? 0 : newY;
+
             return new RealGeneCoding(newX, newY);
         }
 
         public void Mutate(ref Random rnd)
         {
             PositionX += (rnd.NextDouble() - 0.5) / 2;
+            PositionX = PositionX > 1 ? 1 : PositionX < 0 ? 0 : PositionX;
             PositionY += (rnd.NextDouble() - 0.5) / 2;
+            PositionY = PositionY > 1 ? 1 : PositionY < 0 ? 0 : PositionY;
         }
 
         public Vector RealPosition(ref RectangleF field)

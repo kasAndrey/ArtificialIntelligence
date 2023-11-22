@@ -42,9 +42,15 @@ namespace ArtificialIntelligence.HebbianLearningRule
 
         public void Train(Vector[] referenceImages)
         {
-            if (referenceImages.Length != ImagesCount) throw new ArgumentException("");
+            if (referenceImages.Length != ImagesCount) throw new ArgumentException($"Exactly {ImagesCount} images are needed");
 
             componentsCount = referenceImages[0].Count;
+
+            for (int i = 1; i < ImagesCount; i++)
+            {
+                if (referenceImages[i].Count != componentsCount) throw new ArgumentException("Images have different components count!");
+            }
+
             neuronWeights = new(NeuronsCount, componentsCount + 1);
 
             Matrix initialSignals = new(ImagesCount, NeuronsCount);

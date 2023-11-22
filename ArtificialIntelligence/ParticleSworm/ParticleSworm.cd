@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Comment CommentText="TestFunction =&#xD;&#xA;Func&lt;double, double, double&gt;">
+    <Position X="9.55" Y="5.643" Height="0.517" Width="2.276" />
+  </Comment>
+  <Class Name="ArtificialIntelligence.ParticleSworm.ParticleSworm">
+    <Position X="0.5" Y="1.25" Width="6.25" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="ArtificialIntelligence.ParticleSworm.ParticleSworm.Particle">
+        <TypeIdentifier>
+          <NewMemberFileName>ParticleSworm\ParticleSworm.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAQACAAAEAgAAAAAAAAAAAAABAAAEAAAAAA=</HashCode>
+      <FileName>ParticleSworm\ParticleSworm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArtificialIntelligence.MathObjects.Vector" Collapsed="true">
+    <Position X="7.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAEAAAQAAAAESAEAAARAAAAAAQAAAAAQAAAAAAA=</HashCode>
+      <FileName>MathObjects\Vector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArtificialIntelligence.GraphicsMGMT.Function">
+    <Position X="7.5" Y="3.5" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAgA=</HashCode>
+      <FileName>GraphicsMGMT\Function.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArtificialIntelligence.GraphicsMGMT.Plotter">
+    <Position X="7.5" Y="1.5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>GraphicsMGMT\Plotter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArtificialIntelligence.ParticleSworm.ParticleSwormForm">
+    <Position X="12.5" Y="1.5" Width="5.25" />
+    <Members>
+      <Field Name="components" Hidden="true" />
+      <Method Name="Dispose" Hidden="true" />
+      <Field Name="findMinimumButton" Hidden="true" />
+      <Field Name="formulaImage" Hidden="true" />
+      <Field Name="functions" Hidden="true" />
+      <Method Name="InitializeComponent" Hidden="true" />
+      <Field Name="particleCount" Hidden="true" />
+      <Field Name="particleCountLabel" Hidden="true" />
+      <Field Name="plot" Hidden="true" />
+      <Field Name="resultLabel" Hidden="true" />
+      <Field Name="startButton" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>CBAAAAAAAKAQAAEEggGAiAACIAAAAAwwoAAAAsAAAAA=</HashCode>
+      <FileName>ParticleSworm\ParticleSwormForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.Windows.Forms.Form" Collapsed="true">
+    <Position X="12.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
