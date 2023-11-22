@@ -4,6 +4,7 @@ using ArtificialIntelligence.ParticleSworm;
 using ArtificialIntelligence.GeneticAlgorithm;
 using ArtificialIntelligence.SimulatedAnnealing;
 using ArtificialIntelligence.HebbianLearningRule;
+using ArtificialIntelligence.DataMining;
 
 namespace ArtificialIntelligence
 {
@@ -22,8 +23,8 @@ namespace ArtificialIntelligence
             CreateNewForm("Genetic Algorithm", new GeneticAlgorithmForm());
             CreateNewForm("Simulated Annealing", new SimulatedAnnealingForm());
             CreateNewForm("Hebbian Learning Rule", new HebbianNNForm());
-            CreateNewForm("Fuzzy logic", new Form());
-            CreateNewForm("Data mining", new Form());
+            CreateNewForm("Data mining", new DataMiningForm());
+            CreateNewForm("Fuzzy logic", new /*FuzzyLogic*/Form());
         }
 
         private void CreateNewForm(string description, Form form)

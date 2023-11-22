@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <Folder Include="Resources\Functions\" />
+    <Folder Include="Resources\DataFiles\" />
   </ItemGroup>
 
 </Project>
