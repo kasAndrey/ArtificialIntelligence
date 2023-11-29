@@ -5,6 +5,7 @@ using ArtificialIntelligence.GeneticAlgorithm;
 using ArtificialIntelligence.SimulatedAnnealing;
 using ArtificialIntelligence.HebbianLearningRule;
 using ArtificialIntelligence.DataMining;
+using ArtificialIntelligence.FuzzyLogic;
 
 namespace ArtificialIntelligence
 {
@@ -24,7 +25,7 @@ namespace ArtificialIntelligence
             CreateNewForm("Simulated Annealing", new SimulatedAnnealingForm());
             CreateNewForm("Hebbian Learning Rule", new HebbianNNForm());
             CreateNewForm("Data mining", new DataMiningForm());
-            CreateNewForm("Fuzzy logic", new /*FuzzyLogic*/Form());
+            CreateNewForm("Fuzzy logic", new FuzzyLogicForm());
         }
 
         private void CreateNewForm(string description, Form form)

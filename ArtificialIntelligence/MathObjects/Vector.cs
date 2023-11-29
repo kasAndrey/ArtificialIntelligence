@@ -52,6 +52,17 @@
             return c;
         }
 
+        public static Vector operator *(Vector A, double c)
+        {
+            Vector r = new(A.Count);
+            for (int i = 0; i < A.Count; i++)
+            {
+                r[i] = c * A[i];
+            }
+
+            return r;
+        }
+
         public static Vector operator -(Vector A, Vector B)
         {
             return A + (-B);
