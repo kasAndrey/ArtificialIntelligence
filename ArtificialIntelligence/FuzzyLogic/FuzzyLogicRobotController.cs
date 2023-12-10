@@ -12,7 +12,7 @@ namespace ArtificialIntelligence.FuzzyLogic
         public RobotDummy(Vector pos, double size = 0.33)
         {
             Angle = 0;
-            FOV = 80;
+            FOV = 90;
             Position = pos;
             Size = size > 0.99 ? 0.99 : size < 0.1 ? 0.1 : size;
         }
@@ -151,8 +151,8 @@ namespace ArtificialIntelligence.FuzzyLogic
             };
 
         private readonly FuzzyRelation velocityRelation = new() {
-                { "Low", new PointF[5] { new(-0.02f, 1), new(0.02f, 1), new(0.05f, 0.6f), new(0.13f, 0), new(0.2f, 0) } },
-                { "High", new PointF[5] { new(-0.02f, 0), new(0.02f, 0), new(0.09f, 0), new(0.16f, 0.65f), new(0.2f, 1) } }
+                { "Low", new PointF[5] { new(-0.025f, 1), new(0.02f, 1), new(0.05f, 0.6f), new(0.13f, 0), new(0.2f, 0) } },
+                { "High", new PointF[5] { new(-0.025f, 0), new(0.05f, 0), new(0.13f, 0.6f), new(0.16f, 1), new(0.2f, 1) } }
             };
 
         private readonly FuzzyRelation angVelocityRelation = new() {
@@ -170,9 +170,11 @@ namespace ArtificialIntelligence.FuzzyLogic
 
         public void MakeOneIteration()
         {
-            dangerF = dangerRelation.GetRelationsForValue(GetDangerValue(robot.Angle));
-            dangerR = dangerRelation.GetRelationsForValue(GetDangerValue(robot.Angle - robot.FOV / 2));
-            dangerL = dangerRelation.GetRelationsForValue(GetDangerValue(robot.Angle + robot.FOV / 2));
+            double d = GetDangerValue(robot.Angle);
+            double f = robot.FOV / 2 * (1 - d * 0.97);
+            dangerF = dangerRelation.GetRelationsForValue(d);
+            dangerR = dangerRelation.GetRelationsForValue(GetDangerValue(robot.Angle - f));
+            dangerL = dangerRelation.GetRelationsForValue(GetDangerValue(robot.Angle + f));
 
             ApplyRules();
 
@@ -200,21 +202,24 @@ namespace ArtificialIntelligence.FuzzyLogic
             if (dangerF is null || dangerL is null || dangerR is null)
                 throw new ArgumentNullException(nameof(dangerF), "Fuzzification is not complete");
 
+            static double OrFunction(params double[] values) => values.Max();
+            static double AndFunction(params double[] values) => values.Min();
+
             vel = new();
             angVel = new();
 
-            vel.Add("High", dangerF["Low"] + (dangerL["Low"] + dangerR["Low"]) / 5);
-            vel.Add("Low", dangerF["High"] + (dangerL["High"] + dangerR["High"]) / 5);
+            vel.Add("High", OrFunction(dangerF["Low"], dangerL["Low"], dangerR["Low"]));
+            vel.Add("Low", OrFunction(dangerF["High"], dangerL["High"], dangerR["High"]));
 
-            if (dangerR["High"] > 0.97 && dangerL["High"] > 0.97 && dangerF["High"] > 0.97)
+            if (AndFunction(dangerR["High"], dangerL["High"], dangerF["High"]) > 0.95)
             {
-                angVel.Add("Right", 1.5);
+                angVel.Add("Right", 1);
                 angVel.Add("Left", 0);
             }
             else
             {
-                angVel.Add("Left", (dangerR["High"] + dangerL["Low"]) / 2);
-                angVel.Add("Right", (dangerR["Low"] + dangerL["High"]) / 2);
+                angVel.Add("Left",OrFunction(dangerR["High"], dangerL["Low"]));
+                angVel.Add("Right", OrFunction(dangerR["Low"], dangerL["High"]));
             }
 
             velocity = velocityRelation.Defuzzificate(vel);

@@ -41,7 +41,7 @@ namespace ArtificialIntelligence.FuzzyLogic
 
             await Task.Run(() =>
             {
-                while (spawnPosition is null || !simulation) ;
+                while (spawnPosition is null) if (!simulation) return;
                 ctrl = new(spawnPosition, 0.3, map!);
                 Vector realRobotSize = new(0.3 * map.PreferredSize.Width / map.ActualSize.Width, 0.3 * map.PreferredSize.Height / map.ActualSize.Height);
 
