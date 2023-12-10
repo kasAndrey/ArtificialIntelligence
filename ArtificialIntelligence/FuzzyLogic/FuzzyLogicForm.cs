@@ -30,15 +30,18 @@ namespace ArtificialIntelligence.FuzzyLogic
 
         private async void SetupRobot(object sender, EventArgs e)
         {
-            //g = mapPictureBox.CreateGraphics();
+            g = mapPictureBox.CreateGraphics();
             simulation = true;
             launchRobot.Text = "Stop";
             launchRobot.Click -= SetupRobot;
             launchRobot.Click += StopRobot;
 
+            loadMapButton.Enabled = false;
+            generateRandomMap.Enabled = false;
+
             await Task.Run(() =>
             {
-                while (spawnPosition is null) ;
+                while (spawnPosition is null || !simulation) ;
                 ctrl = new(spawnPosition, 0.3, map!);
                 Vector realRobotSize = new(0.3 * map.PreferredSize.Width / map.ActualSize.Width, 0.3 * map.PreferredSize.Height / map.ActualSize.Height);
 
@@ -49,7 +52,7 @@ namespace ArtificialIntelligence.FuzzyLogic
                     g.Clear(Color.White);
                     g.DrawImage(mapImage!, 0, 0, map.PreferredSize.Width, map.PreferredSize.Height);
                     g.FillEllipse(new SolidBrush(Color.Red), (float)drawRobotPosition[0], (float)drawRobotPosition[1], (float)realRobotSize[0], (float)realRobotSize[1]);
-                    
+
                     ctrl.MakeOneIteration();
                     Thread.Sleep(100);
                 }
@@ -64,6 +67,9 @@ namespace ArtificialIntelligence.FuzzyLogic
             launchRobot.Text = "Launch Robot";
             launchRobot.Click += SetupRobot;
             launchRobot.Click -= StopRobot;
+
+            loadMapButton.Enabled = true;
+            generateRandomMap.Enabled = true;
         }
 
         private void PictureBoxClick(object sender, EventArgs e)
@@ -92,6 +98,12 @@ namespace ArtificialIntelligence.FuzzyLogic
             launchRobot.Enabled = true;
             map.PreferredSize = mapPictureBox.Size;
             mapPictureBox.Image = mapImage = map.Draw();
+        }
+
+        private void OnPictureBoxResize(object sender, EventArgs e)
+        {
+            if (map is null) return;
+            map.PreferredSize = mapPictureBox.Size;
         }
     }
 }

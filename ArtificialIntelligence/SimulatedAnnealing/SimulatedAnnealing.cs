@@ -62,14 +62,12 @@ namespace ArtificialIntelligence.SimulatedAnnealing
         private GraphPath Mutate()
         {
             GraphPath newPath = new (Solution);
-            for (int i = 1; i < newPath.Count; i++)
-            {
-                int t = newPath[i];
-                int k = rnd.Next(1, newPath.Count);
-                newPath[i] = newPath[k];
-                newPath[k] = t;
-            }
 
+            int i = rnd.Next(1, newPath.Count);
+            int k = rnd.Next(1, newPath.Count);
+            if (i == k) k = (k == newPath.Count - 1) ? 1 : k + 1;
+
+            (newPath[k], newPath[i]) = (newPath[i], newPath[k]);
             return newPath;
         }
     }

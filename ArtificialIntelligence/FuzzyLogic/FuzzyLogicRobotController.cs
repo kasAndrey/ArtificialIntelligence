@@ -12,7 +12,7 @@ namespace ArtificialIntelligence.FuzzyLogic
         public RobotDummy(Vector pos, double size = 0.33)
         {
             Angle = 0;
-            FOV = 74;
+            FOV = 80;
             Position = pos;
             Size = size > 0.99 ? 0.99 : size < 0.1 ? 0.1 : size;
         }

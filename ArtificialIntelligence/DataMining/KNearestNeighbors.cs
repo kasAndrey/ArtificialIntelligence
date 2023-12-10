@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace ArtificialIntelligence.DataMining
+﻿namespace ArtificialIntelligence.DataMining
 {
     public class KNearestNeighbors : DataMiningStructure
     {

@@ -44,10 +44,11 @@
             mapPictureBox.Location = new Point(12, 12);
             mapPictureBox.Name = "mapPictureBox";
             mapPictureBox.Size = new Size(426, 426);
-            mapPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+            mapPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             mapPictureBox.TabIndex = 0;
             mapPictureBox.TabStop = false;
             mapPictureBox.Click += PictureBoxClick;
+            mapPictureBox.Resize += OnPictureBoxResize;
             // 
             // loadMapButton
             // 

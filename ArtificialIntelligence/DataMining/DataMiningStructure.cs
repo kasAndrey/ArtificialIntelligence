@@ -12,7 +12,6 @@
 
         public DataType[]? Types { get; private set; }
         public string[] Headers;
-        public readonly List<int> Filter;
 
         private readonly Dictionary<string, int> stringIndexPair;
         private const string separator = ";";
@@ -27,7 +26,6 @@
             Types = null;
             Headers = headers;
             stringIndexPair = new();
-            Filter = new();
             minValuesForTypes = new double[headers.Length];
             maxValuesForTypes = new double[headers.Length];
             for (int i = 0; i < headers.Length; i++)
@@ -43,7 +41,6 @@
             Types = other.Types;
             Headers = other.Headers;
             stringIndexPair = other.stringIndexPair;
-            Filter = other.Filter;
             minValuesForTypes = other.minValuesForTypes;
             maxValuesForTypes = other.maxValuesForTypes;
         }
@@ -95,7 +92,7 @@
                 {
                     if (stringIndexPair.TryAdd(data[j][i], k)) k++;
                 }
-                if (k >= Count / 2) Filter.Add(i);
+                //if (k >= Count / 2) Filter.Add(i);
             }
 
             MinimaxNormalization();
@@ -136,7 +133,7 @@
             throw new NotImplementedException();
         }
 
-        public void MinimaxNormalization()
+        private void MinimaxNormalization()
         {
             for (int i = 0; i < Count; i++)
             {
