@@ -7,7 +7,7 @@ namespace ArtificialIntelligence.GeneticAlgorithm
     {
         public List<Entity> Entities;
         public double CrossingoverPossibility;
-        public double PopulationCrossingoverWeight;
+        public int MaxIterations;
         public double MutationPossibility;
         public Vector globalBestPoint;
         public EntityCodingType type;
@@ -20,7 +20,7 @@ namespace ArtificialIntelligence.GeneticAlgorithm
             Function f,
             EntityCodingType codingType,
             double crossingoverPossibility = 0.9,
-            double populationCrossingoverWeight = 0.5,
+            int maxIterations = 100,
             double mutationPossibility = 0.25
             )
         {
@@ -41,7 +41,7 @@ namespace ArtificialIntelligence.GeneticAlgorithm
 
             this.f = f;
             CrossingoverPossibility = crossingoverPossibility;
-            PopulationCrossingoverWeight = populationCrossingoverWeight;
+            MaxIterations = maxIterations;
             MutationPossibility = mutationPossibility;
 
             globalBestPoint = GetBestPoint();
@@ -51,11 +51,11 @@ namespace ArtificialIntelligence.GeneticAlgorithm
         {
             Vector previous;
             int sameResults = 0;
-            while (sameResults < 5 && Entities.Count > 1)
+            for (int iter = 0; sameResults < 5 && Entities.Count > 1 && iter < MaxIterations; ++iter)
             {
                 previous = globalBestPoint;
                 NextGeneration();
-                if ((previous - globalBestPoint).SqrMagnitude() < 1e-6) sameResults++;
+                if ((previous - globalBestPoint).SqrMagnitude() < 1e-3) sameResults++;
                 else sameResults = 0;
             }
 
@@ -74,21 +74,27 @@ namespace ArtificialIntelligence.GeneticAlgorithm
 
         private void Crossingover()
         {
+            int initialCount = Entities.Count;
+
+            for (int i = 0; i < initialCount; i++)
+            {
+                if (rnd.NextDouble() < CrossingoverPossibility)
+                {
+                    int index = rnd.Next(initialCount);
+                    if (i == index) continue;
+
+                    Entities.Add(new(Entities[i].GeneCoding.CrossingoverWith(Entities[index].GeneCoding, ref rnd)));
+                }
+            }
+
             Entities.Sort((Entity e1, Entity e2) => {
                 Vector p1 = e1.GeneCoding.RealPosition(ref f.Bounds);
                 Vector p2 = e2.GeneCoding.RealPosition(ref f.Bounds);
                 double val1 = f.F(p1[0], p1[1]), val2 = f.F(p2[0], p2[1]);
                 return val1 < val2 ? -1 : val1 > val2 ? 1 : 0;
-                });
+            });
 
-            List<Entity> newEntitiesGeneration = Entities.Take((int)(Entities.Count * PopulationCrossingoverWeight)).ToList();
-
-            for (int i = 1; i < Entities.Count / 2; i++)
-            {
-                if (rnd.NextDouble() < CrossingoverPossibility)
-                    newEntitiesGeneration.Add(new(newEntitiesGeneration[i - 1].GeneCoding.CrossingoverWith(newEntitiesGeneration[i].GeneCoding, ref rnd)));
-            }
-            Entities = newEntitiesGeneration;
+            Entities = Entities.Take(initialCount).ToList();
         }
 
         private Vector GetBestPoint()

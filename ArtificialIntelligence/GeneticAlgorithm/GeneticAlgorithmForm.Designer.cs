@@ -40,8 +40,8 @@
             crossingoverPossibility = new NumericUpDown();
             mutationPossibilityLabel = new Label();
             mutationPossibility = new NumericUpDown();
-            populationValue = new NumericUpDown();
-            populationLabel = new Label();
+            iterationsValue = new NumericUpDown();
+            iterationsLabel = new Label();
             codingTypeComboBox = new ComboBox();
             codingTypeLabel = new Label();
             functionLabel = new Label();
@@ -51,7 +51,7 @@
             ((System.ComponentModel.ISupportInitialize)generationEntitiesCount).BeginInit();
             ((System.ComponentModel.ISupportInitialize)crossingoverPossibility).BeginInit();
             ((System.ComponentModel.ISupportInitialize)mutationPossibility).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)populationValue).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)iterationsValue).BeginInit();
             SuspendLayout();
             // 
             // formulaImage
@@ -169,7 +169,7 @@
             // 
             mutationPossibilityLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             mutationPossibilityLabel.AutoSize = true;
-            mutationPossibilityLabel.Location = new Point(507, 120);
+            mutationPossibilityLabel.Location = new Point(507, 87);
             mutationPossibilityLabel.Name = "mutationPossibilityLabel";
             mutationPossibilityLabel.Size = new Size(141, 20);
             mutationPossibilityLabel.TabIndex = 18;
@@ -180,7 +180,7 @@
             mutationPossibility.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             mutationPossibility.DecimalPlaces = 2;
             mutationPossibility.Increment = new decimal(new int[] { 2, 0, 0, 131072 });
-            mutationPossibility.Location = new Point(725, 118);
+            mutationPossibility.Location = new Point(725, 87);
             mutationPossibility.Maximum = new decimal(new int[] { 10, 0, 0, 65536 });
             mutationPossibility.Minimum = new decimal(new int[] { 1, 0, 0, 65536 });
             mutationPossibility.Name = "mutationPossibility";
@@ -188,28 +188,26 @@
             mutationPossibility.TabIndex = 17;
             mutationPossibility.Value = new decimal(new int[] { 25, 0, 0, 131072 });
             // 
-            // populationValue
+            // iterationsValue
             // 
-            populationValue.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            populationValue.DecimalPlaces = 2;
-            populationValue.Increment = new decimal(new int[] { 2, 0, 0, 131072 });
-            populationValue.Location = new Point(725, 85);
-            populationValue.Maximum = new decimal(new int[] { 10, 0, 0, 65536 });
-            populationValue.Minimum = new decimal(new int[] { 1, 0, 0, 65536 });
-            populationValue.Name = "populationValue";
-            populationValue.Size = new Size(63, 27);
-            populationValue.TabIndex = 17;
-            populationValue.Value = new decimal(new int[] { 5, 0, 0, 65536 });
+            iterationsValue.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            iterationsValue.Location = new Point(725, 120);
+            iterationsValue.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+            iterationsValue.Minimum = new decimal(new int[] { 10, 0, 0, 0 });
+            iterationsValue.Name = "iterationsValue";
+            iterationsValue.Size = new Size(63, 27);
+            iterationsValue.TabIndex = 17;
+            iterationsValue.Value = new decimal(new int[] { 100, 0, 0, 0 });
             // 
-            // populationLabel
+            // iterationsLabel
             // 
-            populationLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            populationLabel.AutoSize = true;
-            populationLabel.Location = new Point(507, 87);
-            populationLabel.Name = "populationLabel";
-            populationLabel.Size = new Size(212, 20);
-            populationLabel.TabIndex = 18;
-            populationLabel.Text = "Population Crossingover Value:";
+            iterationsLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            iterationsLabel.AutoSize = true;
+            iterationsLabel.Location = new Point(507, 122);
+            iterationsLabel.Name = "iterationsLabel";
+            iterationsLabel.Size = new Size(106, 20);
+            iterationsLabel.TabIndex = 18;
+            iterationsLabel.Text = "Max Iterations:";
             // 
             // codingTypeComboBox
             // 
@@ -262,9 +260,9 @@
             ClientSize = new Size(800, 450);
             Controls.Add(functionLabel);
             Controls.Add(codingTypeLabel);
-            Controls.Add(populationLabel);
+            Controls.Add(iterationsLabel);
             Controls.Add(mutationPossibilityLabel);
-            Controls.Add(populationValue);
+            Controls.Add(iterationsValue);
             Controls.Add(mutationPossibility);
             Controls.Add(crossingoverPossibilityLabel);
             Controls.Add(crossingoverPossibility);
@@ -285,7 +283,7 @@
             ((System.ComponentModel.ISupportInitialize)generationEntitiesCount).EndInit();
             ((System.ComponentModel.ISupportInitialize)crossingoverPossibility).EndInit();
             ((System.ComponentModel.ISupportInitialize)mutationPossibility).EndInit();
-            ((System.ComponentModel.ISupportInitialize)populationValue).EndInit();
+            ((System.ComponentModel.ISupportInitialize)iterationsValue).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -304,8 +302,8 @@
         private NumericUpDown crossingoverPossibility;
         private Label mutationPossibilityLabel;
         private NumericUpDown mutationPossibility;
-        private NumericUpDown populationValue;
-        private Label populationLabel;
+        private NumericUpDown iterationsValue;
+        private Label iterationsLabel;
         private ComboBox codingTypeComboBox;
         private Label codingTypeLabel;
         private Label functionLabel;

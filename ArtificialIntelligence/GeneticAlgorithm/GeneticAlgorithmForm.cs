@@ -46,7 +46,7 @@ namespace ArtificialIntelligence.GeneticAlgorithm
             codingTypeComboBox.Items.AddRange(Enum.GetNames(typeof(EntityCodingType)));
             SetFunction(this, new EventArgs());
 
-            boundsButton.Click += (object sender, EventArgs e) => new Bounds(ref f.Bounds, this).Show();
+            boundsButton.Click += (object? sender, EventArgs e) => new Bounds(ref f!.Bounds, this).Show();
         }
 
         private void FindMinimumValue(object sender, EventArgs e)
@@ -56,7 +56,7 @@ namespace ArtificialIntelligence.GeneticAlgorithm
             graphics.Clear(Color.White);
             graphics.DrawImage(functionPlot, 0, 0, plot.Width, plot.Height);
 
-            ga = new((int)generationEntitiesCount.Value, f, codingType, (double)crossingoverPossibility.Value, (double)populationValue.Value, (double)mutationPossibility.Value);
+            ga = new((int)generationEntitiesCount.Value, f, codingType, (double)crossingoverPossibility.Value, (int)iterationsValue.Value, (double)mutationPossibility.Value);
             Vector result = ga.FindMinimum();
             resultLabel.Text = $"Result: f({result[0]:F3}, {result[1]:F3}) = {f.F(result[0], result[1]):F3}";
 
@@ -71,7 +71,7 @@ namespace ArtificialIntelligence.GeneticAlgorithm
             g.DrawEllipse(new Pen(Color.Black), (int)realPos[0] - size / 2, (int)realPos[1] - size / 2, size, size);
         }
 
-        private void Start(object sender, EventArgs e)
+        private void Start(object? sender, EventArgs e)
         {
             simulationStarted = true;
             foreach (Control c in Controls) c.Enabled = false;
@@ -83,7 +83,7 @@ namespace ArtificialIntelligence.GeneticAlgorithm
             StartSimulation();
         }
 
-        private void Stop(object sender, EventArgs e)
+        private void Stop(object? sender, EventArgs e)
         {
             foreach (Control c in Controls) c.Enabled = true;
             simulationStarted = false;
@@ -100,7 +100,7 @@ namespace ArtificialIntelligence.GeneticAlgorithm
             Vector minimum = new(2);
             await Task.Run(() =>
             {
-                ga = new((int)generationEntitiesCount.Value, f, codingType, (double)crossingoverPossibility.Value, (double)populationValue.Value, (double)mutationPossibility.Value);
+                ga = new((int)generationEntitiesCount.Value, f, codingType, (double)crossingoverPossibility.Value, (int)iterationsValue.Value, (double)mutationPossibility.Value);
                 while (simulationStarted)
                 {
                     minimum = ga.NextGeneration();
