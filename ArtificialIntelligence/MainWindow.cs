@@ -6,36 +6,44 @@ using ArtificialIntelligence.SimulatedAnnealing;
 using ArtificialIntelligence.HebbianLearningRule;
 using ArtificialIntelligence.DataMining;
 using ArtificialIntelligence.FuzzyLogic;
+using ArtificialIntelligence.BeeColony;
+using GraphicsManagement;
 
 namespace ArtificialIntelligence
 {
     public partial class MainWindow : Form
     {
-        private Dictionary<string, Form> allForms = new();
         private Button? currentFormButton;
+
+        private readonly Dictionary<string, Form> allForms = new()
+        {
+            { "Hamming Neural Network", new HammingForm() },
+            { "Ant Colony Optimization", new AntColonyForm() },
+            { "Particle Sworm", new ParticleSwormForm() },
+            { "Genetic Algorithm", new GeneticAlgorithmForm() },
+            { "Simulated Annealing", new SimulatedAnnealingForm() },
+            { "Hebbian Learning Rule", new HebbianNNForm() },
+            { "Data mining", new DataMiningForm() },
+            { "Fuzzy logic", new FuzzyLogicForm() },
+            { "Bee Colony Optimization", new BeeColonyForm() },
+        };
 
         public MainWindow()
         {
             InitializeComponent();
 
-            CreateNewForm("Hamming Neural Network", new HammingForm());
-            CreateNewForm("Ant Colony Optimization", new AntColonyForm());
-            CreateNewForm("Particle Sworm", new ParticleSwormForm());
-            CreateNewForm("Genetic Algorithm", new GeneticAlgorithmForm());
-            CreateNewForm("Simulated Annealing", new SimulatedAnnealingForm());
-            CreateNewForm("Hebbian Learning Rule", new HebbianNNForm());
-            CreateNewForm("Data mining", new DataMiningForm());
-            CreateNewForm("Fuzzy logic", new FuzzyLogicForm());
+            foreach (var (key, value) in allForms)
+            {
+                AddNewForm(key, value);
+            }
         }
 
-        private void CreateNewForm(string description, Form form)
+        private void AddNewForm(string description, Form form)
         {
             form.TopLevel = false;
             form.FormBorderStyle = FormBorderStyle.None;
             form.Dock = DockStyle.Fill;
             form.Visible = true;
-
-            allForms.Add(description, form);
 
             Button btn = new()
             {
@@ -47,7 +55,7 @@ namespace ArtificialIntelligence
             buttonsPanel.Controls.Add(btn);
         }
 
-        private void ShowFormInContainer(object sender, EventArgs e)
+        private void ShowFormInContainer(object? sender, EventArgs e)
         {
             ContainerForForms.Controls.Clear();
 
