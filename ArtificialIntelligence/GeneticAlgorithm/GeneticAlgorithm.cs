@@ -1,5 +1,5 @@
-﻿using ArtificialIntelligence.GraphicsMGMT;
-using ArtificialIntelligence.MathObjects;
+﻿using GraphicsManagement;
+using MathObjects;
 
 namespace ArtificialIntelligence.GeneticAlgorithm
 {

@@ -1,5 +1,6 @@
-﻿using ArtificialIntelligence.GraphicsMGMT;
-using ArtificialIntelligence.MathObjects;
+﻿using GraphicsManagement;
+using MathObjects;
+using System.Linq;
 
 namespace ArtificialIntelligence.ParticleSworm
 {
@@ -68,7 +69,7 @@ namespace ArtificialIntelligence.ParticleSworm
             {
                 previous = globalBestPoint;
                 NextIteration();
-                if ((previous - globalBestPoint).SqrMagnitude() < 1e-6) sameResults++;
+                if ((previous - globalBestPoint).SqrMagnitude() < 1e-6) ++sameResults;
                 else sameResults = 0;
             }
 
@@ -81,15 +82,6 @@ namespace ArtificialIntelligence.ParticleSworm
             return globalBestPoint = GetBestPoint();
         }
 
-        private Vector GetBestPoint()
-        {
-            Vector bp = Particles[0].BestPoint;
-            for (int i = 1; i < Particles.Length; i++)
-            {
-                if (F(Particles[i].BestPoint[0], Particles[i].BestPoint[1]) < F(bp[0], bp[1]))
-                    bp = Particles[i].BestPoint;
-            }
-            return bp;
-        }
+        private Vector GetBestPoint() => Particles.MinBy((Particle p) => F(p.BestPoint[0], p.BestPoint[1]))!.BestPoint;
     }
 }

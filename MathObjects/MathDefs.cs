@@ -1,6 +1,6 @@
-﻿namespace ArtificialIntelligence.MathObjects
+﻿namespace MathObjects
 {
-    static class MathDefs
+    public static class MathDefs
     {
         public static double DegToRad(double degrees) => degrees * Math.PI / 180;
 

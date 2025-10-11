@@ -1,8 +1,8 @@
-﻿namespace ArtificialIntelligence.MathObjects
+﻿namespace MathObjects
 {
     public class Matrix
     {
-        private double[,] data;
+        private readonly double[,] data;
 
         public int Rows { get; private set; }
         public int Columns { get; private set; }
@@ -11,7 +11,7 @@
         {
             Rows = rows; Columns = columns;
             data = new double[Rows, Columns];
-            
+
             for (int i = 0; i < Rows; i++)
             {
                 for (int j = 0; j < Columns; j++)
@@ -27,7 +27,7 @@
             set { data[i, j] = value; }
         }
 
-        public static Matrix operator * (Matrix A, Matrix B)
+        public static Matrix operator *(Matrix A, Matrix B)
         {
             if (A.Columns != B.Rows)
             {
@@ -49,7 +49,14 @@
             return c;
         }
 
-        public static bool operator==(Matrix A, Matrix B)
+        public override int GetHashCode() => data.GetHashCode();
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Matrix m && this == m;
+        }
+
+        public static bool operator ==(Matrix A, Matrix B)
         {
             if (A.Columns != B.Columns || A.Rows != B.Rows) return false;
 
@@ -66,7 +73,7 @@
 
         public static bool operator !=(Matrix A, Matrix B) => !(A == B);
 
-        public static Matrix operator + (Matrix A, Matrix B)
+        public static Matrix operator +(Matrix A, Matrix B)
         {
             if (!(A.Columns == B.Columns && A.Rows == B.Rows))
             {
@@ -117,7 +124,7 @@
 
         public Matrix Transpose()
         {
-            Matrix c = new (Columns, Rows);
+            Matrix c = new(Columns, Rows);
             for (int i = 0; i < Rows; i++)
             {
                 for (int j = 0; j < Columns; j++)

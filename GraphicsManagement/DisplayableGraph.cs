@@ -1,7 +1,7 @@
-﻿using ArtificialIntelligence.MathObjects;
-using static ArtificialIntelligence.MathObjects.MathDefs;
+﻿using MathObjects;
+using static MathObjects.MathDefs;
 
-namespace ArtificialIntelligence.GraphicsMGMT
+namespace GraphicsManagement
 {
     public class DisplayableVertex
     {

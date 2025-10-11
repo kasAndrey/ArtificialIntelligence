@@ -1,4 +1,4 @@
-﻿namespace ArtificialIntelligence.MathObjects
+﻿namespace MathObjects
 {
     public class GraphEdge
     {
@@ -25,13 +25,8 @@
     {
         public GraphPath() : base() { }
 
-        public GraphPath(List<int> other)
-        {
-            foreach (int i in other)
-            {
-                Add(i);
-            }
-        }
+        public GraphPath(List<int> other) : base(other)
+        { }
 
         protected const string goesTo = "->";
 

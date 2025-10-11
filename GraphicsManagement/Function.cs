@@ -1,4 +1,4 @@
-﻿namespace ArtificialIntelligence.GraphicsMGMT
+﻿namespace GraphicsManagement
 {
     using TestFunction = Func<double, double, double>;
 

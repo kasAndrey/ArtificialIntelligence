@@ -1,8 +1,8 @@
-﻿using ArtificialIntelligence.MathObjects;
+﻿using MathObjects;
 
-namespace ArtificialIntelligence.GraphicsMGMT
+namespace GraphicsManagement
 {
-    static class GraphParser
+    public static class GraphParser
     {
         public const string GraphsDirectory = @"..\..\..\Resources\Graphs\";
 

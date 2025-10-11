@@ -1,4 +1,4 @@
-﻿namespace ArtificialIntelligence.GeneticAlgorithm
+﻿namespace ArtificialIntelligence.Misc
 {
     partial class Bounds
     {

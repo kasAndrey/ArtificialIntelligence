@@ -81,28 +81,28 @@
       <FileName>MathObjects\MathDefs.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ArtificialIntelligence.GraphicsMGMT.DisplayableGraphPath">
+  <Class Name="GraphicsManagement.DisplayableGraphPath">
     <Position X="5.5" Y="0.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAQAAAAAAAAAAAACAA=</HashCode>
       <FileName>GraphicsMGMT\DisplayableGraph.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ArtificialIntelligence.GraphicsMGMT.DisplayableVertex">
+  <Class Name="GraphicsManagement.DisplayableVertex">
     <Position X="8.25" Y="0.5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAQAAAAAAAAAAAAAAAAAYAA=</HashCode>
       <FileName>GraphicsMGMT\DisplayableGraph.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ArtificialIntelligence.GraphicsMGMT.DisplayableGraph">
+  <Class Name="GraphicsManagement.DisplayableGraph">
     <Position X="10.75" Y="4.25" Width="4.25" />
     <TypeIdentifier>
       <HashCode>AQKAACAAAAAAIgAAAAAAAAAAAQAAAAEAEAAAAAMgAAA=</HashCode>
       <FileName>GraphicsMGMT\DisplayableGraph.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ArtificialIntelligence.GraphicsMGMT.GraphParser">
+  <Class Name="GraphicsManagement.GraphParser">
     <Position X="0.5" Y="5.25" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>

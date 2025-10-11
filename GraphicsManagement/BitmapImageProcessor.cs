@@ -1,8 +1,8 @@
-﻿using ArtificialIntelligence.MathObjects;
+﻿using MathObjects;
 
-namespace ArtificialIntelligence.GraphicsMGMT
+namespace GraphicsManagement
 {
-    static class BitmapImageProcessor
+    public static class BitmapImageProcessor
     {
         const int GREY = 0x888888;
         const int WHITE = 0xFFFFFF;

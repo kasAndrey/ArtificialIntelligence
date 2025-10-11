@@ -27,14 +27,14 @@
       <FileName>MathObjects\Vector.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ArtificialIntelligence.GraphicsMGMT.Function">
+  <Class Name="GraphicsManagement.Function">
     <Position X="7.5" Y="3.5" Width="4.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAgA=</HashCode>
       <FileName>GraphicsMGMT\Function.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ArtificialIntelligence.GraphicsMGMT.Plotter">
+  <Class Name="GraphicsManagement.Plotter">
     <Position X="7.5" Y="1.5" Width="4.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAABAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>

@@ -1,4 +1,4 @@
-﻿using ArtificialIntelligence.MathObjects;
+﻿using MathObjects;
 using ArtificialIntelligence.NeuralNetwork;
 
 namespace ArtificialIntelligence.Hamming

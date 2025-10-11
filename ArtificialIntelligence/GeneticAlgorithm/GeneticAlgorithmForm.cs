@@ -1,9 +1,10 @@
-﻿using ArtificialIntelligence.GraphicsMGMT;
-using ArtificialIntelligence.MathObjects;
+﻿using GraphicsManagement;
+using MathObjects;
+using ArtificialIntelligence.Misc;
 
 namespace ArtificialIntelligence.GeneticAlgorithm
 {
-    public partial class GeneticAlgorithmForm : Form
+    public partial class GeneticAlgorithmForm : Form, IBoundable
     {
         GeneticAlgorithm? ga;
         EntityCodingType codingType;
@@ -37,7 +38,6 @@ namespace ArtificialIntelligence.GeneticAlgorithm
         public GeneticAlgorithmForm()
         {
             InitializeComponent();
-            Plotter.ColorPallete = new List<Color>() { Color.LimeGreen, Color.LightGreen, Color.Yellow, Color.Red, Color.Pink, Color.White };
             graphics = plot.CreateGraphics();
             functions.Items.Clear();
             functions.Items.AddRange(possibleFunctions.Keys.ToArray());

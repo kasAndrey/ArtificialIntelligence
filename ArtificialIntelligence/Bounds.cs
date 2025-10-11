@@ -1,10 +1,12 @@
-﻿namespace ArtificialIntelligence.GeneticAlgorithm
+﻿using GraphicsManagement;
+
+namespace ArtificialIntelligence.Misc
 {
     public partial class Bounds : Form
     {
-        private GeneticAlgorithmForm wnd;
+        private IBoundable wnd;
 
-        public Bounds(ref RectangleF initial, in GeneticAlgorithmForm mw)
+        public Bounds(ref RectangleF initial, in IBoundable mw)
         {
             wnd = mw;
             InitializeComponent();

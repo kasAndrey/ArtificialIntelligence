@@ -1,4 +1,4 @@
-﻿using ArtificialIntelligence.MathObjects;
+﻿using MathObjects;
 using System.ComponentModel;
 
 namespace ArtificialIntelligence.FuzzyLogic

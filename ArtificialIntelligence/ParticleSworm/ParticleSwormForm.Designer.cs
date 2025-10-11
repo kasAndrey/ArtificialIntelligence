@@ -36,6 +36,8 @@
             resultLabel = new Label();
             formulaImage = new PictureBox();
             startButton = new Button();
+            boundsButton = new Button();
+            functionLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)plot).BeginInit();
             ((System.ComponentModel.ISupportInitialize)particleCount).BeginInit();
             ((System.ComponentModel.ISupportInitialize)formulaImage).BeginInit();
@@ -48,7 +50,7 @@
             plot.BorderStyle = BorderStyle.FixedSingle;
             plot.Location = new Point(10, 8);
             plot.Name = "plot";
-            plot.Size = new Size(519, 410);
+            plot.Size = new Size(483, 410);
             plot.SizeMode = PictureBoxSizeMode.StretchImage;
             plot.TabIndex = 0;
             plot.TabStop = false;
@@ -56,11 +58,11 @@
             // particleCount
             // 
             particleCount.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            particleCount.Location = new Point(703, 12);
+            particleCount.Location = new Point(608, 12);
             particleCount.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
             particleCount.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             particleCount.Name = "particleCount";
-            particleCount.Size = new Size(85, 27);
+            particleCount.Size = new Size(174, 27);
             particleCount.TabIndex = 1;
             particleCount.Value = new decimal(new int[] { 100, 0, 0, 0 });
             // 
@@ -68,7 +70,7 @@
             // 
             particleCountLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             particleCountLabel.AutoSize = true;
-            particleCountLabel.Location = new Point(594, 14);
+            particleCountLabel.Location = new Point(499, 14);
             particleCountLabel.Name = "particleCountLabel";
             particleCountLabel.Size = new Size(103, 20);
             particleCountLabel.TabIndex = 2;
@@ -80,9 +82,9 @@
             functions.DisplayMember = "Function 1";
             functions.FormattingEnabled = true;
             functions.Items.AddRange(new object[] { "Function 1", "Function 2", "Function 3", "Function 4", "Function 5" });
-            functions.Location = new Point(594, 56);
+            functions.Location = new Point(608, 56);
             functions.Name = "functions";
-            functions.Size = new Size(194, 28);
+            functions.Size = new Size(174, 28);
             functions.TabIndex = 3;
             functions.Text = "Function 1";
             functions.SelectedValueChanged += SetFunction;
@@ -90,7 +92,7 @@
             // findMinimumButton
             // 
             findMinimumButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            findMinimumButton.Location = new Point(620, 177);
+            findMinimumButton.Location = new Point(577, 177);
             findMinimumButton.Name = "findMinimumButton";
             findMinimumButton.Size = new Size(141, 56);
             findMinimumButton.TabIndex = 4;
@@ -111,9 +113,9 @@
             // formulaImage
             // 
             formulaImage.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            formulaImage.Location = new Point(594, 90);
+            formulaImage.Location = new Point(499, 90);
             formulaImage.Name = "formulaImage";
-            formulaImage.Size = new Size(194, 51);
+            formulaImage.Size = new Size(196, 51);
             formulaImage.SizeMode = PictureBoxSizeMode.Zoom;
             formulaImage.TabIndex = 6;
             formulaImage.TabStop = false;
@@ -121,7 +123,7 @@
             // startButton
             // 
             startButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            startButton.Location = new Point(620, 239);
+            startButton.Location = new Point(577, 239);
             startButton.Name = "startButton";
             startButton.Size = new Size(141, 56);
             startButton.TabIndex = 4;
@@ -129,16 +131,38 @@
             startButton.UseVisualStyleBackColor = true;
             startButton.Click += Start;
             // 
+            // boundsButton
+            // 
+            boundsButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            boundsButton.Location = new Point(701, 90);
+            boundsButton.Name = "boundsButton";
+            boundsButton.Size = new Size(81, 51);
+            boundsButton.TabIndex = 11;
+            boundsButton.Text = "Modify Bounds";
+            boundsButton.UseVisualStyleBackColor = true;
+            // 
+            // functionLabel
+            // 
+            functionLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            functionLabel.AutoSize = true;
+            functionLabel.Location = new Point(499, 59);
+            functionLabel.Name = "functionLabel";
+            functionLabel.Size = new Size(68, 20);
+            functionLabel.TabIndex = 2;
+            functionLabel.Text = "Function:";
+            // 
             // ParticleSwormForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(794, 450);
+            Controls.Add(boundsButton);
             Controls.Add(formulaImage);
             Controls.Add(resultLabel);
             Controls.Add(startButton);
             Controls.Add(findMinimumButton);
             Controls.Add(functions);
+            Controls.Add(functionLabel);
             Controls.Add(particleCountLabel);
             Controls.Add(particleCount);
             Controls.Add(plot);
@@ -161,5 +185,7 @@
         private Label resultLabel;
         private PictureBox formulaImage;
         private Button startButton;
+        private Button boundsButton;
+        private Label functionLabel;
     }
 }

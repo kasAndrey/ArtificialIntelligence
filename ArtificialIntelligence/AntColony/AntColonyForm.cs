@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using ArtificialIntelligence.GraphicsMGMT;
+using GraphicsManagement;
 
 namespace ArtificialIntelligence.AntColony
 {
@@ -13,15 +13,18 @@ namespace ArtificialIntelligence.AntColony
         public AntColonyForm()
         {
             InitializeComponent();
+
+            graphics = graphPictureBox.CreateGraphics();
+
             aco = null;
             graph = null;
 
-            loadGraphButton.Click += (object sender, EventArgs e) => { ogfd.ShowDialog(); };
+            loadGraphButton.Click += (object? sender, EventArgs e) => { ogfd.ShowDialog(); };
 
             ogfd.InitialDirectory = new DirectoryInfo(GraphParser.GraphsDirectory).FullName;
         }
 
-        private void NextAnt(object sender, EventArgs e)
+        private void NextAnt(object? sender, EventArgs e)
         {
             graphics.Clear(graphPictureBox.BackColor);
             DisplayableGraphPath vertexes = new (graph!.Vertices);
@@ -38,7 +41,7 @@ namespace ArtificialIntelligence.AntColony
             }
         }
 
-        private void InitializeACO(object sender, EventArgs e)
+        private void InitializeACO(object? sender, EventArgs e)
         {
             SetState(true);
 
@@ -53,7 +56,7 @@ namespace ArtificialIntelligence.AntColony
             graph!.Draw(graphics);
         }
 
-        private void StopACO(object sender, EventArgs e)
+        private void StopACO(object? sender, EventArgs e)
         {
             SetState(false);
         }
@@ -152,6 +155,7 @@ namespace ArtificialIntelligence.AntColony
                 MessageBox.Show(exc.Message, "Error occured", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             graphics = graphPictureBox.CreateGraphics();
             graph!.FixGraphics(graphics, graphPictureBox.Bounds);
             graph!.Draw(graphics);

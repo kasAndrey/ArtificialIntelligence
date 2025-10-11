@@ -1,4 +1,4 @@
-﻿namespace ArtificialIntelligence.GraphicsMGMT
+﻿namespace GraphicsManagement
 {
     using Gradient = List<Color>;
 
@@ -66,6 +66,16 @@
             }
 
             return img;
+        }
+
+        public static void DrawPoint(in Graphics g, PointF p, RectangleF offset, Size imageSize, int size = 20)
+        {
+            PointF realPos = new(
+                (p.X - offset.X) * imageSize.Width / offset.Width,
+                (p.Y - offset.Y) * imageSize.Height / offset.Height
+                );
+            g.FillEllipse(new SolidBrush(Color.White), (int)realPos.X - size / 2, (int)realPos.Y - size / 2, size, size);
+            g.DrawEllipse(new Pen(Color.Black), (int)realPos.X - size / 2, (int)realPos.Y - size / 2, size, size);
         }
     }
 }

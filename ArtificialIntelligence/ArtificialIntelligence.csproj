@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -11,6 +11,11 @@
   <ItemGroup>
     <Folder Include="Resources\Functions\" />
     <Folder Include="Resources\DataFiles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GraphicsManagement\GraphicsManagement.csproj" />
+    <ProjectReference Include="..\MathObjects\MathObjects.csproj" />
   </ItemGroup>
 
 </Project>

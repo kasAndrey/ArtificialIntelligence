@@ -1,5 +1,5 @@
-﻿using ArtificialIntelligence.GraphicsMGMT;
-using ArtificialIntelligence.MathObjects;
+﻿using GraphicsManagement;
+using MathObjects;
 using System.ComponentModel;
 
 namespace ArtificialIntelligence.HebbianLearningRule

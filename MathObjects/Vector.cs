@@ -1,4 +1,6 @@
-﻿namespace ArtificialIntelligence.MathObjects
+﻿using System.Drawing;
+
+namespace MathObjects
 {
     public class Vector
     {
@@ -116,5 +118,7 @@
             }
             return repr + "]";
         }
+
+        public static explicit operator PointF(Vector v) => new((float)v[0], (float)v[1]);
     }
 }

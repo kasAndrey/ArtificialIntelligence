@@ -1,4 +1,4 @@
-﻿using ArtificialIntelligence.GraphicsMGMT;
+﻿using GraphicsManagement;
 using System.ComponentModel;
 
 namespace ArtificialIntelligence.SimulatedAnnealing

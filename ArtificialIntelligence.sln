@@ -3,7 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtificialIntelligence", "ArtificialIntelligence\ArtificialIntelligence.csproj", "{FB943D9F-5F73-41F8-87D3-C38F45948C4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtificialIntelligence", "ArtificialIntelligence\ArtificialIntelligence.csproj", "{FB943D9F-5F73-41F8-87D3-C38F45948C4D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EC33BF04-6F60-4AD7-AC62-3FE58EE51112} = {EC33BF04-6F60-4AD7-AC62-3FE58EE51112}
+		{F578BB5B-0334-41E0-8746-3C6C6880B7A4} = {F578BB5B-0334-41E0-8746-3C6C6880B7A4}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathObjects", "MathObjects\MathObjects.csproj", "{EC33BF04-6F60-4AD7-AC62-3FE58EE51112}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphicsManagement", "GraphicsManagement\GraphicsManagement.csproj", "{F578BB5B-0334-41E0-8746-3C6C6880B7A4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EC33BF04-6F60-4AD7-AC62-3FE58EE51112} = {EC33BF04-6F60-4AD7-AC62-3FE58EE51112}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +26,14 @@ Global
 		{FB943D9F-5F73-41F8-87D3-C38F45948C4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB943D9F-5F73-41F8-87D3-C38F45948C4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB943D9F-5F73-41F8-87D3-C38F45948C4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC33BF04-6F60-4AD7-AC62-3FE58EE51112}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC33BF04-6F60-4AD7-AC62-3FE58EE51112}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC33BF04-6F60-4AD7-AC62-3FE58EE51112}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC33BF04-6F60-4AD7-AC62-3FE58EE51112}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F578BB5B-0334-41E0-8746-3C6C6880B7A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F578BB5B-0334-41E0-8746-3C6C6880B7A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F578BB5B-0334-41E0-8746-3C6C6880B7A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F578BB5B-0334-41E0-8746-3C6C6880B7A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

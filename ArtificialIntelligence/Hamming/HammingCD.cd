@@ -59,7 +59,7 @@
       <FileName>MathObjects\Matrix.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ArtificialIntelligence.GraphicsMGMT.BitmapImageProcessor">
+  <Class Name="GraphicsManagement.BitmapImageProcessor">
     <Position X="0.75" Y="4.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AgAEAAAAAAAAQAAAAAAIAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>

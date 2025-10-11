@@ -1,8 +1,9 @@
-﻿using ArtificialIntelligence.GraphicsMGMT;
-using ArtificialIntelligence.MathObjects;
+﻿using ArtificialIntelligence.Misc;
+using GraphicsManagement;
+using MathObjects;
 namespace ArtificialIntelligence.ParticleSworm
 {
-    public partial class ParticleSwormForm : Form
+    public partial class ParticleSwormForm : Form, IBoundable
     {
         ParticleSworm? ps;
         Function f;
@@ -36,11 +37,12 @@ namespace ArtificialIntelligence.ParticleSworm
         public ParticleSwormForm()
         {
             InitializeComponent();
-            Plotter.ColorPallete = new List<Color>() { Color.LimeGreen, Color.LightGreen, Color.Yellow, Color.Red, Color.Pink, Color.White };
             graphics = plot.CreateGraphics();
             functions.Items.Clear();
             functions.Items.AddRange(possibleFunctions.Keys.ToArray());
             SetFunction(this, new EventArgs());
+            
+            boundsButton.Click += (object? sender, EventArgs e) => new Bounds(ref f!.Bounds, this).Show();
         }
 
         private void FindMinimumValue(object sender, EventArgs e)
@@ -54,18 +56,10 @@ namespace ArtificialIntelligence.ParticleSworm
             Vector result = ps.FindMinimum();
             resultLabel.Text = $"Result: f({result[0]:F3}, {result[1]:F3}) = {f.F(result[0], result[1]):F3}";
 
-            DrawPoint(result, graphics);
+            Plotter.DrawPoint(graphics, (PointF)result, f.Bounds, plot.Size);
         }
 
-        private void DrawPoint(Vector p, in Graphics g, int size = 20)
-        {
-            //graphics = plot.CreateGraphics();
-            Vector realPos = new((p[0] - f.Bounds.X) * plot.Width / f.Bounds.Width, (p[1] - f.Bounds.Y) * plot.Height / f.Bounds.Height);
-            g.FillEllipse(new SolidBrush(Color.White), (int)realPos[0] - size / 2, (int)realPos[1] - size / 2, size, size);
-            g.DrawEllipse(new Pen(Color.Black), (int)realPos[0] - size / 2, (int)realPos[1] - size / 2, size, size);
-        }
-
-        private void Start(object sender, EventArgs e)
+        private void Start(object? sender, EventArgs e)
         {
             simulationStarted = true;
             startButton.Text = "Stop Simulation";
@@ -75,7 +69,7 @@ namespace ArtificialIntelligence.ParticleSworm
             StartSimulation();
         }
 
-        private void Stop(object sender, EventArgs e)
+        private void Stop(object? sender, EventArgs e)
         {
             simulationStarted = false;
             startButton.Text = "Start Simulation";
@@ -97,7 +91,10 @@ namespace ArtificialIntelligence.ParticleSworm
                     minimum = ps.NextIteration();
 
                     g.Clear(Color.Transparent);
-                    foreach (ParticleSworm.Particle p in ps.Particles) DrawPoint(p.Position, g, 8);
+                    foreach (ParticleSworm.Particle p in ps.Particles)
+                    {
+                        Plotter.DrawPoint(g, (PointF)p.Position, f.Bounds, plot.Size, 8);
+                    }
 
                     graphics.DrawImage(functionPlot, 0, 0, plot.Width, plot.Height);
                     graphics.DrawImage(image, 0, 0, plot.Width, plot.Height);
@@ -121,6 +118,13 @@ namespace ArtificialIntelligence.ParticleSworm
 
             functionPlot = Plotter.DrawFunction(f, 75);
 
+            plot.Image = functionPlot;
+        }
+
+        public void SetFunctionBounds(RectangleF newBnd)
+        {
+            f.Bounds = newBnd;
+            functionPlot = Plotter.DrawFunction(f, 75);
             plot.Image = functionPlot;
         }
     }

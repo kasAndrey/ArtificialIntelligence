@@ -1,3 +1,5 @@
+using GraphicsManagement;
+
 namespace ArtificialIntelligence
 {
     internal static class Program
@@ -9,6 +11,17 @@ namespace ArtificialIntelligence
         static void Main()
         {
             ApplicationConfiguration.Initialize();
+
+            // Set color pallete
+            Plotter.ColorPallete = [
+                Color.LimeGreen,
+                Color.LightGreen,
+                Color.Yellow,
+                Color.Red,
+                Color.Pink,
+                Color.White,
+            ];
+
             Application.Run(new MainWindow());
         }
     }

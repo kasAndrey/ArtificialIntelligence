@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
-using ArtificialIntelligence.GraphicsMGMT;
-using ArtificialIntelligence.MathObjects;
+using GraphicsManagement;
+using MathObjects;
 
 namespace ArtificialIntelligence.Hamming
 {
@@ -29,7 +29,7 @@ namespace ArtificialIntelligence.Hamming
 
             ofd.InitialDirectory = new DirectoryInfo(BitmapImageProcessor.ImagesDirectory).FullName;
 
-            openFileButton.Click += (object sender, EventArgs e) => { ofd.ShowDialog(); };
+            openFileButton.Click += (object? sender, EventArgs e) => { ofd.ShowDialog(); };
         }
 
         private void OnFileSelected(object sender, CancelEventArgs e)
