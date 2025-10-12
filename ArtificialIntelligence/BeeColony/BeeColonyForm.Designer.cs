@@ -42,11 +42,14 @@
             beesCount = new NumericUpDown();
             tempLabel = new Label();
             initialTemperature = new NumericUpDown();
+            scoutsRatio = new NumericUpDown();
+            scoutsRatioLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)iterationsValue).BeginInit();
             ((System.ComponentModel.ISupportInitialize)formulaImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)plot).BeginInit();
             ((System.ComponentModel.ISupportInitialize)beesCount).BeginInit();
             ((System.ComponentModel.ISupportInitialize)initialTemperature).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)scoutsRatio).BeginInit();
             SuspendLayout();
             // 
             // functionLabel
@@ -63,7 +66,7 @@
             // 
             iterationsLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             iterationsLabel.AutoSize = true;
-            iterationsLabel.Location = new Point(508, 84);
+            iterationsLabel.Location = new Point(508, 117);
             iterationsLabel.Name = "iterationsLabel";
             iterationsLabel.Size = new Size(106, 20);
             iterationsLabel.TabIndex = 28;
@@ -72,7 +75,7 @@
             // iterationsValue
             // 
             iterationsValue.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            iterationsValue.Location = new Point(726, 82);
+            iterationsValue.Location = new Point(726, 115);
             iterationsValue.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
             iterationsValue.Minimum = new decimal(new int[] { 10, 0, 0, 0 });
             iterationsValue.Name = "iterationsValue";
@@ -199,15 +202,39 @@
             initialTemperature.TabIndex = 27;
             initialTemperature.Value = new decimal(new int[] { 500, 0, 0, 0 });
             // 
+            // scoutsRatio
+            // 
+            scoutsRatio.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            scoutsRatio.DecimalPlaces = 2;
+            scoutsRatio.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
+            scoutsRatio.Location = new Point(726, 82);
+            scoutsRatio.Maximum = new decimal(new int[] { 1, 0, 0, 0 });
+            scoutsRatio.Name = "scoutsRatio";
+            scoutsRatio.Size = new Size(63, 27);
+            scoutsRatio.TabIndex = 27;
+            scoutsRatio.Value = new decimal(new int[] { 25, 0, 0, 131072 });
+            // 
+            // scoutsRatioLabel
+            // 
+            scoutsRatioLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            scoutsRatioLabel.AutoSize = true;
+            scoutsRatioLabel.Location = new Point(508, 84);
+            scoutsRatioLabel.Name = "scoutsRatioLabel";
+            scoutsRatioLabel.Size = new Size(90, 20);
+            scoutsRatioLabel.TabIndex = 28;
+            scoutsRatioLabel.Text = "Scouts ratio:";
+            // 
             // BeeColonyForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(functionLabel);
+            Controls.Add(scoutsRatioLabel);
             Controls.Add(tempLabel);
             Controls.Add(beesCountLabel);
             Controls.Add(iterationsLabel);
+            Controls.Add(scoutsRatio);
             Controls.Add(initialTemperature);
             Controls.Add(beesCount);
             Controls.Add(iterationsValue);
@@ -225,6 +252,7 @@
             ((System.ComponentModel.ISupportInitialize)plot).EndInit();
             ((System.ComponentModel.ISupportInitialize)beesCount).EndInit();
             ((System.ComponentModel.ISupportInitialize)initialTemperature).EndInit();
+            ((System.ComponentModel.ISupportInitialize)scoutsRatio).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -245,5 +273,7 @@
         private NumericUpDown beesCount;
         private Label tempLabel;
         private NumericUpDown initialTemperature;
+        private NumericUpDown scoutsRatio;
+        private Label scoutsRatioLabel;
     }
 }

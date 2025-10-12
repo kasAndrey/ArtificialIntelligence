@@ -54,7 +54,7 @@ namespace ArtificialIntelligence.BeeColony
             graphics.Clear(Color.White);
             graphics.DrawImage(functionPlot, 0, 0, plot.Width, plot.Height);
 
-            bco = new((int)beesCount.Value, f);
+            bco = new((int)beesCount.Value, (double)initialTemperature.Value, (double)scoutsRatio.Value, f);
             Vector result = bco.FindMinimum((int)iterationsValue.Value);
             resultLabel.Text = $"Result: f({result[0]:F3}, {result[1]:F3}) = {f.F(result[0], result[1]):F3}";
 
@@ -87,21 +87,22 @@ namespace ArtificialIntelligence.BeeColony
             Vector minimum = new(2);
             await Task.Run(() =>
             {
-                bco = new BeeColonyOptimization((int)beesCount.Value, f);
+                bco = new BeeColonyOptimization((int)beesCount.Value, (double)initialTemperature.Value, (double)scoutsRatio.Value, f);
                 while (simulationStarted)
                 {
-                    minimum = bco.NextIteration();
-
                     g.Clear(Color.Transparent);
                     
-                    /*
-                     * Code for drawing simulation
-                     */
+                    foreach ((Vector p, Color c, float scale) in bco.GetBeesInformation())
+                    {
+                        Plotter.DrawPoint(g, (PointF)p, f.Bounds, plot.Size, (int)(8f * scale), c.ToArgb());
+                    }
 
                     graphics.DrawImage(functionPlot, 0, 0, plot.Width, plot.Height);
                     graphics.DrawImage(image, 0, 0, plot.Width, plot.Height);
 
-                    Thread.Sleep(50);
+                    Thread.Sleep(150);
+
+                    minimum = bco.NextIteration();
                 }
             });
 

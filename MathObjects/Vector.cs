@@ -65,6 +65,8 @@ namespace MathObjects
             return r;
         }
 
+        public static Vector operator *(double c, Vector A) => A * c;
+
         public static Vector operator -(Vector A, Vector B)
         {
             return A + (-B);
