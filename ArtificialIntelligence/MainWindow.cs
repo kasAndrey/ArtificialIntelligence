@@ -1,13 +1,12 @@
 using ArtificialIntelligence.Hamming;
 using ArtificialIntelligence.AntColony;
-using ArtificialIntelligence.ParticleSworm;
+using ArtificialIntelligence.ParticleSwarm;
 using ArtificialIntelligence.GeneticAlgorithm;
 using ArtificialIntelligence.SimulatedAnnealing;
 using ArtificialIntelligence.HebbianLearningRule;
 using ArtificialIntelligence.DataMining;
 using ArtificialIntelligence.FuzzyLogic;
 using ArtificialIntelligence.BeeColony;
-using GraphicsManagement;
 
 namespace ArtificialIntelligence
 {
@@ -19,7 +18,7 @@ namespace ArtificialIntelligence
         {
             { "Hamming Neural Network", new HammingForm() },
             { "Ant Colony Optimization", new AntColonyForm() },
-            { "Particle Sworm", new ParticleSwormForm() },
+            { "Particle Swarm", new ParticleSwarmForm() },
             { "Genetic Algorithm", new GeneticAlgorithmForm() },
             { "Simulated Annealing", new SimulatedAnnealingForm() },
             { "Hebbian Learning Rule", new HebbianNNForm() },

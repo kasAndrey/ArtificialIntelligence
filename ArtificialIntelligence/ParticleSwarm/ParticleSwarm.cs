@@ -2,11 +2,11 @@
 using MathObjects;
 using System.Linq;
 
-namespace ArtificialIntelligence.ParticleSworm
+namespace ArtificialIntelligence.ParticleSwarm
 {
     using TestFunction = Func<double, double, double>;
 
-    public class ParticleSworm
+    public class ParticleSwarm
     {
         public class Particle
         {
@@ -46,7 +46,7 @@ namespace ArtificialIntelligence.ParticleSworm
 
         readonly Random rand;
 
-        public ParticleSworm(int particleCount, Function f)
+        public ParticleSwarm(int particleCount, Function f)
         {
             Particles = new Particle[particleCount];
             F = f.F;
