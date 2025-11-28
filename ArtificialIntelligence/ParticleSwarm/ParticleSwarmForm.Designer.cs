@@ -1,6 +1,6 @@
-﻿namespace ArtificialIntelligence.ParticleSworm
+﻿namespace ArtificialIntelligence.ParticleSwarm
 {
-    partial class ParticleSwormForm
+    partial class ParticleSwarmForm
     {
         /// <summary>
         /// Required designer variable.
@@ -151,7 +151,7 @@
             functionLabel.TabIndex = 2;
             functionLabel.Text = "Function:";
             // 
-            // ParticleSwormForm
+            // ParticleSwarmForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -166,8 +166,8 @@
             Controls.Add(particleCountLabel);
             Controls.Add(particleCount);
             Controls.Add(plot);
-            Name = "ParticleSwormForm";
-            Text = "ParticleSwormForm";
+            Name = "ParticleSwarmForm";
+            Text = "ParticleSwarmForm";
             ((System.ComponentModel.ISupportInitialize)plot).EndInit();
             ((System.ComponentModel.ISupportInitialize)particleCount).EndInit();
             ((System.ComponentModel.ISupportInitialize)formulaImage).EndInit();

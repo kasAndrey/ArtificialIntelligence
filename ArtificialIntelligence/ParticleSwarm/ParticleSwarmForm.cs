@@ -1,14 +1,13 @@
-﻿using GraphicsManagement;
+﻿using ArtificialIntelligence.Misc;
+using GraphicsManagement;
 using MathObjects;
-using ArtificialIntelligence.Misc;
 using static GraphicsManagement.PossibleFunctions;
 
-namespace ArtificialIntelligence.GeneticAlgorithm
+namespace ArtificialIntelligence.ParticleSwarm
 {
-    public partial class GeneticAlgorithmForm : Form, IBoundable
+    public partial class ParticleSwarmForm : Form, IBoundable
     {
-        GeneticAlgorithm? ga;
-        EntityCodingType codingType;
+        ParticleSwarm? ps;
         Function f;
         const string pathToImages = @"..\..\..\Resources\Functions\";
         const string imagesExtension = ".jpg";
@@ -17,17 +16,15 @@ namespace ArtificialIntelligence.GeneticAlgorithm
         Graphics graphics;
         bool simulationStarted;
 
-        public GeneticAlgorithmForm()
+
+        public ParticleSwarmForm()
         {
             InitializeComponent();
             graphics = plot.CreateGraphics();
             functions.Items.Clear();
             functions.Items.AddRange(possibleFunctions.Keys.ToArray());
-
-            codingTypeComboBox.Items.Clear();
-            codingTypeComboBox.Items.AddRange(Enum.GetNames(typeof(EntityCodingType)));
             SetFunction(this, new EventArgs());
-
+            
             boundsButton.Click += (object? sender, EventArgs e) => new Bounds(ref f!.Bounds, this).Show();
         }
 
@@ -38,26 +35,16 @@ namespace ArtificialIntelligence.GeneticAlgorithm
             graphics.Clear(Color.White);
             graphics.DrawImage(functionPlot, 0, 0, plot.Width, plot.Height);
 
-            ga = new((int)generationEntitiesCount.Value, f, codingType, (double)crossingoverPossibility.Value, (int)iterationsValue.Value, (double)mutationPossibility.Value);
-            Vector result = ga.FindMinimum();
+            ps = new((int)particleCount.Value, f);
+            Vector result = ps.FindMinimum();
             resultLabel.Text = $"Result: f({result[0]:F3}, {result[1]:F3}) = {f.F(result[0], result[1]):F3}";
 
-            DrawPoint(result, graphics);
-        }
-
-        private void DrawPoint(Vector p, in Graphics g, int size = 20)
-        {
-            //graphics = plot.CreateGraphics();
-            Vector realPos = new((p[0] - f.Bounds.X) * plot.Width / f.Bounds.Width, (p[1] - f.Bounds.Y) * plot.Height / f.Bounds.Height);
-            g.FillEllipse(new SolidBrush(Color.White), (int)realPos[0] - size / 2, (int)realPos[1] - size / 2, size, size);
-            g.DrawEllipse(new Pen(Color.Black), (int)realPos[0] - size / 2, (int)realPos[1] - size / 2, size, size);
+            Plotter.DrawPoint(graphics, (PointF)result, f.Bounds, plot.Size);
         }
 
         private void Start(object? sender, EventArgs e)
         {
             simulationStarted = true;
-            foreach (Control c in Controls) c.Enabled = false;
-            startButton.Enabled = true;
             startButton.Text = "Stop Simulation";
             startButton.Click -= Start;
             startButton.Click += Stop;
@@ -67,7 +54,6 @@ namespace ArtificialIntelligence.GeneticAlgorithm
 
         private void Stop(object? sender, EventArgs e)
         {
-            foreach (Control c in Controls) c.Enabled = true;
             simulationStarted = false;
             startButton.Text = "Start Simulation";
             startButton.Click -= Stop;
@@ -82,27 +68,24 @@ namespace ArtificialIntelligence.GeneticAlgorithm
             Vector minimum = new(2);
             await Task.Run(() =>
             {
-                ga = new((int)generationEntitiesCount.Value, f, codingType, (double)crossingoverPossibility.Value, (int)iterationsValue.Value, (double)mutationPossibility.Value);
+                ps = new((int)particleCount.Value, f);
                 while (simulationStarted)
                 {
-                    minimum = ga.NextGeneration();
+                    minimum = ps.NextIteration();
 
                     g.Clear(Color.Transparent);
-                    foreach (Entity e in ga.Entities) DrawPoint(e.GeneCoding.RealPosition(ref f.Bounds), g, 8);
+                    foreach (ParticleSwarm.Particle p in ps.Particles)
+                    {
+                        Plotter.DrawPoint(g, (PointF)p.Position, f.Bounds, plot.Size, 8);
+                    }
 
                     graphics.DrawImage(functionPlot, 0, 0, plot.Width, plot.Height);
                     graphics.DrawImage(image, 0, 0, plot.Width, plot.Height);
 
-                    Thread.Sleep(250);
-                    if (ga.Entities.Count < 2)
-                    {
-                        MessageBox.Show("Simulation ended: one entity left", "Simulation ended", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        break;
-                    }
+                    Thread.Sleep(50);
                 }
             });
 
-            if (simulationStarted) Stop(this, EventArgs.Empty);
             resultLabel.Text = $"Result: f({minimum[0]:F3}, {minimum[1]:F3}) = {f.F(minimum[0], minimum[1]):F3}";
         }
 
@@ -119,11 +102,6 @@ namespace ArtificialIntelligence.GeneticAlgorithm
             functionPlot = Plotter.DrawFunction(f, 75);
 
             plot.Image = functionPlot;
-        }
-
-        private void SetCodingType(object sender, EventArgs e)
-        {
-            codingType = (EntityCodingType)Enum.Parse(typeof(EntityCodingType), codingTypeComboBox.Text);
         }
 
         public void SetFunctionBounds(RectangleF newBnd)
